@@ -1,0 +1,2072 @@
+{
+  "title": "独立知学项目：合成原始记录分级验收",
+  "generatedAt": "2026-10-22T14:25:38.534017+00:00",
+  "term": "2026-2027-1",
+  "source": "用户提供培养方案的真实课程代码、学分与计划学期",
+  "evaluationType": "controlled_synthetic_rule_consistency",
+  "scenarioCount": 128,
+  "rawRecordCount": 6656,
+  "majors": {
+    "CS": 64,
+    "SE": 64
+  },
+  "labels": [
+    {
+      "level": 0,
+      "name": "正常"
+    },
+    {
+      "level": 1,
+      "name": "轻度"
+    },
+    {
+      "level": 2,
+      "name": "一般"
+    },
+    {
+      "level": 3,
+      "name": "危急"
+    }
+  ],
+  "scenarioDesign": "2024级第5学期，完整录入已到期必修与所选英语路径，当前必修在修；历史正常成绩85分，0/1/2/5门低学分课程50分。各等级各32个案例，两专业各一半；标签在推断前按场景定义固定。",
+  "confusionMatrix": [
+    [
+      32,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      32,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      32,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      32
+    ]
+  ],
+  "matrixOrientation": "行=预先定义的期望等级，列=实际规则最高等级",
+  "accuracy": 1.0,
+  "perClass": [
+    {
+      "level": 0,
+      "support": 32,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "level": 1,
+      "support": 32,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "level": 2,
+      "support": 32,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "level": 3,
+      "support": 32,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "ACCEPT-0-00",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-01",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-02",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-03",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-04",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-05",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-06",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-07",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-08",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-09",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-10",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-11",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-12",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-13",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-14",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-15",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-16",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-17",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-18",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-19",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-20",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-21",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-22",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-23",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-24",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-25",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-26",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-27",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-28",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-29",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-30",
+      "major": "CS",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-0-31",
+      "major": "SE",
+      "expected": 0,
+      "predicted": 0,
+      "outstandingCourses": 0,
+      "failedCodes": [],
+      "signals": [],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-00",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:152003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-01",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:152003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-02",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:152018"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-03",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:155001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-04",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-05",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:155008"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-06",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155008"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-07",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:155012"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-08",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155009"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-09",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:155013"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-10",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155012"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-11",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:155016"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-12",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155013"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-13",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:155024"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-14",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155016"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-15",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:331002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-16",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155023"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-17",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:397005"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-18",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:155024"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-19",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:491001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-20",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:331002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-21",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:491002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-22",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:397005"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-23",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:491003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-24",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:491001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-25",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:491004"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-26",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:491002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-27",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:791001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-28",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:491003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-29",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:981001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-30",
+      "major": "CS",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "CS:491004"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-1-31",
+      "major": "SE",
+      "expected": 1,
+      "predicted": 1,
+      "outstandingCourses": 1,
+      "failedCodes": [
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-00",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:152003",
+        "CS:152018"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-01",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:152003",
+        "SE:155001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-02",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:152018",
+        "CS:155001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-03",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:155001",
+        "SE:155008"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-04",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155001",
+        "CS:155008"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-05",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:155008",
+        "SE:155012"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-06",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155008",
+        "CS:155009"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-07",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:155012",
+        "SE:155013"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-08",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155009",
+        "CS:155012"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-09",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:155013",
+        "SE:155016"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-10",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155012",
+        "CS:155013"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-11",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:155016",
+        "SE:155024"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-12",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155013",
+        "CS:155016"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-13",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:155024",
+        "SE:331002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-14",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155016",
+        "CS:155023"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-15",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:331002",
+        "SE:397005"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-16",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155023",
+        "CS:155024"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-17",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:397005",
+        "SE:491001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-18",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:155024",
+        "CS:331002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-19",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:491001",
+        "SE:491002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-20",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:331002",
+        "CS:397005"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-21",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:491002",
+        "SE:491003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-22",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:397005",
+        "CS:491001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-23",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:491003",
+        "SE:491004"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-24",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:491001",
+        "CS:491002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-25",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:491004",
+        "SE:791001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-26",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:491002",
+        "CS:491003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-27",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:791001",
+        "SE:981001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-28",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:491003",
+        "CS:491004"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-29",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:981001",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-30",
+      "major": "CS",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "CS:491004",
+        "CS:791001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-2-31",
+      "major": "SE",
+      "expected": 2,
+      "predicted": 2,
+      "outstandingCourses": 2,
+      "failedCodes": [
+        "SE:152003",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-00",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:152003",
+        "CS:152018",
+        "CS:155001",
+        "CS:155008",
+        "CS:155009"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-01",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:152003",
+        "SE:155001",
+        "SE:155008",
+        "SE:155012",
+        "SE:155013"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-02",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:152018",
+        "CS:155001",
+        "CS:155008",
+        "CS:155009",
+        "CS:155012"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-03",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:155001",
+        "SE:155008",
+        "SE:155012",
+        "SE:155013",
+        "SE:155016"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-04",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155001",
+        "CS:155008",
+        "CS:155009",
+        "CS:155012",
+        "CS:155013"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-05",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:155008",
+        "SE:155012",
+        "SE:155013",
+        "SE:155016",
+        "SE:155024"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-06",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155008",
+        "CS:155009",
+        "CS:155012",
+        "CS:155013",
+        "CS:155016"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-07",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:155012",
+        "SE:155013",
+        "SE:155016",
+        "SE:155024",
+        "SE:331002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-08",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155009",
+        "CS:155012",
+        "CS:155013",
+        "CS:155016",
+        "CS:155023"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-09",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:155013",
+        "SE:155016",
+        "SE:155024",
+        "SE:331002",
+        "SE:397005"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-10",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155012",
+        "CS:155013",
+        "CS:155016",
+        "CS:155023",
+        "CS:155024"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-11",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:155016",
+        "SE:155024",
+        "SE:331002",
+        "SE:397005",
+        "SE:491001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-12",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155013",
+        "CS:155016",
+        "CS:155023",
+        "CS:155024",
+        "CS:331002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-13",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:155024",
+        "SE:331002",
+        "SE:397005",
+        "SE:491001",
+        "SE:491002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-14",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155016",
+        "CS:155023",
+        "CS:155024",
+        "CS:331002",
+        "CS:397005"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-15",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:331002",
+        "SE:397005",
+        "SE:491001",
+        "SE:491002",
+        "SE:491003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-16",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155023",
+        "CS:155024",
+        "CS:331002",
+        "CS:397005",
+        "CS:491001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-17",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:397005",
+        "SE:491001",
+        "SE:491002",
+        "SE:491003",
+        "SE:491004"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-18",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:155024",
+        "CS:331002",
+        "CS:397005",
+        "CS:491001",
+        "CS:491002"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-19",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:491001",
+        "SE:491002",
+        "SE:491003",
+        "SE:491004",
+        "SE:791001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-20",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:331002",
+        "CS:397005",
+        "CS:491001",
+        "CS:491002",
+        "CS:491003"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-21",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:491002",
+        "SE:491003",
+        "SE:491004",
+        "SE:791001",
+        "SE:981001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-22",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:397005",
+        "CS:491001",
+        "CS:491002",
+        "CS:491003",
+        "CS:491004"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-23",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:491003",
+        "SE:491004",
+        "SE:791001",
+        "SE:981001",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-24",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:491001",
+        "CS:491002",
+        "CS:491003",
+        "CS:491004",
+        "CS:791001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-25",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:152003",
+        "SE:491004",
+        "SE:791001",
+        "SE:981001",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-26",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:491002",
+        "CS:491003",
+        "CS:491004",
+        "CS:791001",
+        "CS:981001"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-27",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:152003",
+        "SE:155001",
+        "SE:791001",
+        "SE:981001",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-28",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:491003",
+        "CS:491004",
+        "CS:791001",
+        "CS:981001",
+        "CS:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-29",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:152003",
+        "SE:155001",
+        "SE:155008",
+        "SE:981001",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-30",
+      "major": "CS",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "CS:152003",
+        "CS:491004",
+        "CS:791001",
+        "CS:981001",
+        "CS:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    },
+    {
+      "id": "ACCEPT-3-31",
+      "major": "SE",
+      "expected": 3,
+      "predicted": 3,
+      "outstandingCourses": 5,
+      "failedCodes": [
+        "SE:152003",
+        "SE:155001",
+        "SE:155008",
+        "SE:155012",
+        "SE:991101"
+      ],
+      "signals": [
+        "completion",
+        "selection"
+      ],
+      "matched": true
+    }
+  ],
+  "boundaryChecks": [
+    {
+      "name": "重修通过解除未通过状态且只补计该课学分",
+      "passed": true
+    },
+    {
+      "name": "同课程不同学期重复通过不重复计学分",
+      "passed": true
+    },
+    {
+      "name": "未来成绩不改变当前绩点学分和未通过门数",
+      "passed": true
+    },
+    {
+      "name": "新生全部尚未出分保留空成绩且无虚假低分预警",
+      "passed": true
+    },
+    {
+      "name": "未来学期必修课程不算本学期漏选",
+      "passed": true
+    },
+    {
+      "name": "撤销的高分记录不解除历史未通过课程",
+      "passed": true
+    },
+    {
+      "name": "原始加权均分59.99对应成绩等级3",
+      "passed": true,
+      "expected": 3,
+      "actual": 3
+    },
+    {
+      "name": "原始加权均分60对应成绩等级2",
+      "passed": true,
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "name": "原始加权均分69.99对应成绩等级2",
+      "passed": true,
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "name": "原始加权均分70对应成绩等级0",
+      "passed": true,
+      "expected": 0,
+      "actual": 0
+    }
+  ],
+  "boundariesPassed": 10,
+  "allPassed": true,
+  "officialThreshold": null,
+  "limitations": [
+    "这是合成场景的规则一致性验收，不是真实学生观测数据，不是模型泛化或风险预测准确率。",
+    "样例有意控制其他变量并重复覆盖相同分支，128不是128个统计独立的真实学生样本，不能据此估计真实误报率。",
+    "核心通识和个性化选修未伪造校方目录；案例用已核实必修记录隔离分级条件，年度课程认定仍需教务确认。",
+    "B1附件没有给出准确率数字门槛，本报告不自行宣称达到官方数值标准。",
+    "身份权限、自动分发、闭环、学生行动计划和助手异常回退由独立HTTP集成测试验证，不能从本混淆矩阵推断这些功能。"
+  ]
+}
