@@ -1,0 +1,74 @@
+/* 知学统一色板。页面、弹窗和 SVG 共用这些颜色；新增组件请按用途选用。 */
+:root {
+  color-scheme: light;
+
+  /* 正文与中性表面 */
+  --color-ink: #263c34;
+  --color-text: #3e4f46;
+  --color-muted: #5e6e63;
+  --color-surface: #ffffff;
+  --color-canvas: #f5f6f1;
+  --color-subtle: #f0f3ed;
+  --color-border: #dce3d8;
+  --color-border-strong: #89988a;
+
+  /* 品牌色：导航、选中态和主要操作 */
+  --color-primary: #205446;
+  --color-primary-hover: #173e34;
+  --color-primary-soft: #e8efdd;
+  --color-accent: #d6e7b5;
+  --color-on-primary: var(--color-surface);
+  --color-on-primary-muted: #bccfc3;
+  --color-focus: #557a43;
+
+  /* 状态必须同时保留文字说明，不能只靠颜色识别。 */
+  --color-success: #456a35;
+  --color-success-soft: #eef5e7;
+  --color-warning: #805d18;
+  --color-warning-soft: #faf1d8;
+  --color-warning-border: #ddc58e;
+  --color-danger: #a04432;
+  --color-danger-soft: #faeee9;
+  --color-danger-border: #e3bbaf;
+  --color-info: #376b78;
+  --color-info-soft: #eaf2f4;
+
+  /* 分类图表按系列着色；风险等级使用上面的状态色。 */
+  --color-chart-1: #307866;
+  --color-chart-2: #7a935c;
+  --color-chart-3: #b18b3c;
+  --color-chart-4: #6b969e;
+
+  /* 透明层与阴影只在这里定义。 */
+  --color-glass: rgb(255 255 255 / 94%);
+  --color-inverse-subtle: rgb(255 255 255 / 6%);
+  --color-inverse-hover: rgb(255 255 255 / 12%);
+  --color-inverse-border: rgb(255 255 255 / 20%);
+  --color-shadow-faint: rgb(23 62 52 / 4%);
+  --color-shadow: rgb(23 62 52 / 8%);
+  --color-backdrop: rgb(23 62 52 / 36%);
+
+  /* 保留现有组件的变量接口，避免出现第二套颜色来源。 */
+  --text: var(--color-ink);
+  --muted: var(--color-muted);
+  --forest: var(--color-primary);
+  --paper: var(--color-canvas);
+  --border: var(--color-border);
+  --accent: var(--color-accent);
+  --white: var(--color-surface);
+  --red: var(--color-danger);
+  --gold: var(--color-warning);
+  --shadow: 0 16px 55px var(--color-shadow);
+}
+
+/* 深色表面采用浅色焦点环，保持键盘操作时的可见性。 */
+.rail :focus-visible,
+.assistant-promo :focus-visible,
+.login-brand :focus-visible {
+  outline-color: var(--color-accent);
+}
+
+.assistant-promo .btn:hover {
+  background: var(--color-primary-hover);
+  color: var(--color-on-primary);
+}
