@@ -19,11 +19,11 @@ if options.independent: archive_name='知学-B1-独立工作台.zip'
 archive=out/archive_name
 # Ship sources, known reference documents and example screenshots only. Do not
 # descend into user environments, local databases, inspection or design-review files.
-patterns=('*.bat','*.md','requirements*.txt','run.py','Dockerfile','.dockerignore','web/*.css','web/*.html','web/*.js','web/*.svg',
-          'server/*.py','scripts/*.py','scripts/*.ps1','tests/test_*.py','tests/evaluate_*.py','docs/*.md',
+patterns=('*.bat','README.md','requirements*.txt','run.py','Dockerfile','.dockerignore','web/*.css','web/*.html','web/*.js','web/*.svg',
+          'server/*.py','scripts/*.py','scripts/*.ps1','tests/test_*.py','tests/evaluate_*.py',
           'docs/validation.json','docs/support-validation.json','docs/screenshots/*.png',
           'data/b1-requirements.json','data/curriculum.json','data/sources/*人才培养方案.pdf',
-          'data/sources/附件1：任务清单-真实需求(1).xlsx','.impeccable/design.json',
+          'data/sources/附件1：任务清单-真实需求(1).xlsx',
           'web/vendor/echarts/echarts.common.min.js','web/vendor/echarts/LICENSE','web/vendor/echarts/NOTICE',
           'web/vendor/echarts/LICENSE-d3','web/vendor/echarts/source.json','web/media/study-desk.webp',
           'web/media/study-desk.webp.json','web/media/course-arts.webp','web/media/course-arts.webp.json',
@@ -43,7 +43,7 @@ with ZipFile(archive) as z:
                 'zhixue/web/campus-risk.js','zhixue/server/campus.py','zhixue/server/selection_risk.py',
                 'zhixue/server/credit_accounting.py','zhixue/web/campus-portrait.js','zhixue/web/campus-registers.js',
                 'zhixue/web/campus-trend.js','zhixue/web/vendor/echarts/echarts.common.min.js','zhixue/web/vendor/echarts/LICENSE',
-                'zhixue/docs/campus-integration.md'} <= set(z.namelist())
+                'zhixue/README.md'} <= set(z.namelist())
     assert not any('/var/' in p or '/.venv/' in p for p in z.namelist())
     assert not any(p.endswith(('.sqlite3','.sqlite','.db','-wal','-shm')) for p in z.namelist())
 digest=hashlib.sha256(archive.read_bytes()).hexdigest()

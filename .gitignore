@@ -23,5 +23,5 @@ tests/zhixue-check-*/
 *.key
 .DS_Store
 Thumbs.db
-.impeccable/review/
+.impeccable/
 tests/campus-*/
