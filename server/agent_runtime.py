@@ -198,6 +198,7 @@ class ToolSession:
         self.focus_term = self.term
         self.steps, self.results, self.citations, self.proposals = [], [], [], []
         self.suggestions, self.warnings, self.student_ids = [], [], set()
+        self.model_answer = None
 
     def student(self, conn, args):
         sid = args.get("studentId") or self.student_id or (self.user["id"] if self.user["role"] == "student" else None)
@@ -800,8 +801,14 @@ def run_turn(user, message, student_id, thread_id, remote, request_model, contex
                 if not isinstance(response, dict): raise ValueError("模型响应格式无效")
                 calls = response.get("tool_calls") or []
                 if not calls:
-                    answer, warning = guarded_answer(response.get("content"), session)
-                    if warning: session.warnings.append(warning)
+                    raw = response.get("content")
+                    answer, warning = guarded_answer(raw, session)
+                    if warning:
+                        session.warnings.append(warning)
+                        # Keep the rejected reply so the operator can see what the
+                        # model actually said; the verified answer still wins.
+                        if isinstance(raw, str) and raw.strip():
+                            session.model_answer = raw.strip()[:6000]
                     break
                 if not isinstance(calls, list): raise ValueError("模型工具调用格式无效")
                 if call_count + len(calls) > MAX_TOOL_CALLS: raise ValueError("已达到本轮工具调用上限")
@@ -839,10 +846,11 @@ def run_turn(user, message, student_id, thread_id, remote, request_model, contex
               "sources": [c["title"] for c in session.citations], "citations": session.citations,
               "suggestions": list(dict.fromkeys(session.suggestions))[:8],
               "proposals": session.proposals, "warnings": list(dict.fromkeys(session.warnings)),
+              "modelAnswer": session.model_answer,
               "threadId": thread_id, "messageId": _id("AM-"), "studentId": session.student_id}
     with core.connection() as conn:
         conn.execute("UPDATE assistant_threads SET student_id=?,updated_at=?,context=? WHERE id=?", (session.student_id, core.now(), _json({"planningTerm": session.term, "courseIds": session.course_ids}), thread_id))
-        metadata = {k: result[k] for k in ("mode", "steps", "sources", "citations", "suggestions", "proposals", "warnings")}
+        metadata = {k: result[k] for k in ("mode", "steps", "sources", "citations", "suggestions", "proposals", "warnings", "modelAnswer")}
         metadata["studentIds"] = sorted(session.student_ids)
         conn.execute("INSERT INTO assistant_messages VALUES (?,?,?,?,?,?)", (result["messageId"], thread_id, "assistant", answer, _json(metadata), core.now()))
         core.audit(conn, user["id"], "助手查询", {"thread": thread_id, "mode": mode, "tools": [s["tool"] for s in session.steps]})

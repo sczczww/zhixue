@@ -12,8 +12,6 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel,Field
 from .core import ROOT,TERM,initialize,connection,is_demo,is_public_demo,current_user,hash_password,require_admin,issue_session
 from . import campus
-from .env import load_env
-load_env()
 
 @asynccontextmanager
 async def lifespan(app):

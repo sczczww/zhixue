@@ -221,6 +221,18 @@ class AgentAcceptance(unittest.TestCase):
         self.assertNotIn("9999", result["answer"])
         self.assertTrue(any("数字" in warning for warning in result["warnings"]))
 
+    def test_rejected_model_reply_stays_visible_but_never_replaces_verified_answer(self):
+        self.remote()
+        with patch("server.assistant.model_request", side_effect=[call("student_brief"), {"content": "你的累计学分9999，已达到毕业要求。[S1]"}]):
+            rejected = self.ask("核对我的学分")
+        self.assertEqual(rejected["mode"], "local-fallback")
+        self.assertNotIn("9999", rejected["answer"])
+        self.assertIn("9999", rejected["modelAnswer"])
+        with patch("server.assistant.model_request", side_effect=[call("student_brief"), {"content": "已核对当前学情，详情见下方依据。"}]):
+            accepted = self.ask("再核对一次")
+        self.assertEqual(accepted["mode"], "remote")
+        self.assertIsNone(accepted["modelAnswer"])
+
     def test_tool_call_cannot_access_another_student(self):
         self.remote()
         with patch("server.assistant.model_request", return_value=call("student_brief", {"studentId": self.cs})):
