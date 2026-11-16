@@ -673,6 +673,27 @@ def _numbers(text):
     return found
 
 
+def _credit_scale(credits):
+    """Collect every legitimate credit figure, overall and per module.
+
+    A model may legitimately quote a module subtotal ("专业核心还差 35 学分")
+    rather than the overall remainder, so all levels of the credit tree are
+    valid reference values for the earned/required/remaining fields.
+    """
+    scale = {"earned": set(), "total": set(), "remaining": set()}
+    def walk(node):
+        for field, key in (("earned", "earned"), ("total", "total"), ("total", "required"), ("remaining", "remaining")):
+            value = node.get(key)
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                scale[field].add(float(value))
+        for key in ("categories", "subcategories"):
+            for child in node.get(key) or []:
+                if isinstance(child, dict):
+                    walk(child)
+    walk(credits or {})
+    return scale
+
+
 def academic_claim_error(answer, session):
     """Validate common critical claims against the correct subject and field.
 
@@ -692,8 +713,14 @@ def academic_claim_error(answer, session):
     for sentence in re.split(r"[。！？\n；;]", answer):
         claims = [(field, match.group(1), float(match.group(2))) for field, expression in specs for match in re.finditer(expression, sentence, re.I)]
         claims.extend(("failed", None, float(m.group(1))) for m in re.finditer(n + r"\s*门(?:课程)?(?:未通过|挂科)", sentence))
+        if re.search(r"预警规则|判定规则|规则(?:为|是)|阈值|分档|档位|及以上", sentence):
+            # Restating the rule thresholds ("1 门轻度，5 门及以上重点") is not a claim about this student.
+            claims = [c for c in claims if c[0] != "failed"]
         passed = list(re.finditer(r"全部通过|均已通过|全部及格|没有(?:任何)?(?:挂科|未通过课程)|无挂科|零挂科", sentence))
-        positive_passed = [m for m in passed if not re.search(r"(?:并非|不是|并不|没有|尚未|未|不能(?:认定|说明|说)?|不代表)\s*(?:他|她|其|该生)?\s*$", sentence[max(0, m.start()-12):m.start()])]
+        def hypothetical(position):
+            # "若全部通过，缺口可降到 61 学分" states a scenario, not a fact.
+            return bool(re.search(r"若|如果|假如|假设|倘若|一旦|要是|如能|若能", sentence[max(0, position - 16):position]))
+        positive_passed = [m for m in passed if not hypothetical(m.start()) and not re.search(r"(?:并非|不是|并不|没有|尚未|未|不能(?:认定|说明|说)?|不代表)\s*(?:他|她|其|该生)?\s*$", sentence[max(0, m.start()-12):m.start()])]
         graduation = re.search(r"已(?:经)?(?:满足毕业要求|达到全部毕业条件|具备毕业资格)|可以毕业", sentence)
         if graduation and not re.search(r"(?:不能(?:认定|说明)?|不代表|尚不能)\s*$", sentence[max(0, graduation.start()-12):graduation.start()]):
             return "模型把学业核算解释成毕业资格结论，已改用待教务确认的事实摘要。"
@@ -705,10 +732,16 @@ def academic_claim_error(answer, session):
         subject = subjects[0] if subjects else next(iter(profiles.values()), None)
         if subject and session.focus_id and len(profiles) == 1 and subject["student"]["id"] != session.focus_id:
             return "模型结论引用了其他学生的指标，已按当前学生重新核对。"
+        scale = _credit_scale(subject["credits"]) if subject else {"earned": set(), "total": set(), "remaining": set()}
         for field, negated, stated in claims:
+            if field in scale and scale[field]:
+                matched = any(abs(value - stated) < 1e-6 for value in scale[field])
+                if matched == bool(negated):
+                    return "模型将学业指标混用了字段或否定关系，已改用核验后的实际值。"
+                continue
             if subject:
-                expected = {"earned": subject["credits"]["earned"], "total": subject["credits"]["total"], "remaining": subject["credits"]["remaining"],
-                            "gpa": subject["student"].get("gpa"), "failed": subject["metrics"].get("failedCourses")}[field]
+                expected = {"gpa": subject["student"].get("gpa"),
+                            "failed": subject["metrics"].get("failedCourses")}.get(field)
             elif field == "total" and len(programs) == 1:
                 expected = programs[0]["totalCredits"]
             else:

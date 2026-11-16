@@ -451,6 +451,27 @@ class AgentAcceptance(unittest.TestCase):
         self.assertNotIn("甲专属课程", descriptions)
         self.assertTrue(any(c.args[1:] == (self.se, self.core.TERM) for c in planner.call_args_list))
 
+    def test_critical_numeric_guard_tolerates_rule_module_and_hypothetical_wording(self):
+        from server.agent_runtime import ToolSession, academic_claim_error
+        session = ToolSession({"id": "admin", "role": "admin"}, "test", self.se)
+        profile = {"student": {"id": self.se, "name": "乙同学", "gpa": 3.0},
+                   "credits": {"earned": 80, "total": 170, "remaining": 90,
+                               "categories": [
+                                   {"name": "专业", "earned": 30, "required": 64, "remaining": 34,
+                                    "subcategories": [{"name": "专业核心", "earned": 30, "required": 64, "remaining": 34}]},
+                                   {"name": "个性化", "earned": 2, "required": 24, "remaining": 22, "subcategories": []}]},
+                   "metrics": {"failedCourses": 5, "currentGradesPending": False, "dataQuality": {"hasAssessments": True}}}
+        session.results = [{"tool": "student_brief", "data": profile, "studentId": self.se, "sourceIds": ["S1"]}]
+        session.citations = [{"id": "S1", "title": "乙同学当前学情"}]
+        accepted = ("预警规则：未通过课程 1 门为轻度，2–4 门为一般，5 门及以上为重点。[S1]",
+                    "专业核心还差 34 学分，个性化还差 22 学分。[S1]",
+                    "若全部通过，学分缺口可降到 90 学分。[S1]")
+        for claim in accepted:
+            with self.subTest(claim=claim): self.assertIsNone(academic_claim_error(claim, session))
+        rejected = ("未通过课程 2 门。[S1]", "专业核心还差 12 学分。[S1]", "该生全部通过。[S1]")
+        for claim in rejected:
+            with self.subTest(claim=claim): self.assertIsNotNone(academic_claim_error(claim, session))
+
     def test_critical_numeric_guard_binds_field_subject_and_negation(self):
         from server.agent_runtime import ToolSession, guarded_answer
         session = ToolSession({"id": "admin", "role": "admin"}, "test", self.se)
