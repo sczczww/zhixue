@@ -24,9 +24,11 @@ class IntegrationAcceptance(unittest.TestCase):
     def setUpClass(cls):
         cls.directory = tempfile.TemporaryDirectory(prefix="integration-", dir=Path(__file__).resolve().parent)
         cls.root = Path(cls.directory.name).resolve()
-        cls.old_env = {k: os.environ.get(k) for k in ("ZHIXUE_DB", "ZHIXUE_DEMO")}
+        cls.old_env = {k: os.environ.get(k) for k in ("ZHIXUE_DB", "ZHIXUE_DEMO", "ZHIXUE_API_KEY", "ZHIXUE_MODE", "ZHIXUE_BASE_URL", "ZHIXUE_MODEL")}
         os.environ["ZHIXUE_DB"] = str(cls.root / "seed.sqlite3")
         os.environ["ZHIXUE_DEMO"] = "1"
+        for key in ("ZHIXUE_API_KEY", "ZHIXUE_MODE", "ZHIXUE_BASE_URL", "ZHIXUE_MODEL"):
+            os.environ.pop(key, None)
         from server.main import app
         from server import core, assistant
         cls.app, cls.core, cls.assistant = app, core, assistant

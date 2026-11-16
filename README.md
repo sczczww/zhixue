@@ -75,6 +75,17 @@ python -m venv .venv
 
 API Key 只填在本机配置里，不写进上传的源码。网页填写的密钥只在当前服务内存中保存，重启后需重新填写；也支持 `ZHIXUE_API_KEY` 环境变量。
 
+也可以在本机放一份 `.env`（已在 `.gitignore` 中，不会进入仓库）：复制 `.env.example` 为 `.env` 后填写。
+
+```ini
+ZHIXUE_API_KEY=你的密钥
+ZHIXUE_MODE=remote
+ZHIXUE_BASE_URL=https://api.deepseek.com/v1
+ZHIXUE_MODEL=deepseek-chat
+```
+
+启动时自动读取 `.env`，无需打开管理员页面。网页“保存配置”写入的数据库配置优先于 `.env`，`.env` 只补齐空项；数据库尚无模型配置时，`ZHIXUE_MODE` 决定本地或远程模式。共享体验模式仍固定使用本地工作流。
+
 连接测试通过后，还要核对实际工具查询、回答数字和引用是否与页面一致。服务失败时可能回退到本地工作流，应以界面显示的实际模式为准。
 
 需要调整接入代码时，主要查看 `server/assistant.py`（配置与请求）和 `server/agent_runtime.py`（工具调用与行动草案）。可运行现有模拟测试：

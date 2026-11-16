@@ -13,18 +13,30 @@ from .core import connection,current_user,require_admin,visible_student,curricul
 
 router=APIRouter()
 memory_key=''
+DEFAULTS={'mode':'local','baseUrl':'','model':''}
 
 def config():
+    """Database settings win; .env fills the gaps so a local key can be used
+    without opening the admin page. The shared online demo always stays local."""
+    import os
     if is_public_demo():
-        return {'mode':'local','baseUrl':'','model':''}
+        return dict(DEFAULTS)
     with connection() as db:
         row=db.execute("SELECT value FROM settings WHERE key='ai'").fetchone()
-    return json.loads(row['value']) if row else {'mode':'local','baseUrl':'','model':''}
+    cfg={**DEFAULTS,**(json.loads(row['value']) if row else {})}
+    base=os.getenv('ZHIXUE_BASE_URL','').strip().rstrip('/')
+    if base.endswith('/chat/completions'):base=base[:-17]
+    model=os.getenv('ZHIXUE_MODEL','').strip()
+    if not cfg['baseUrl']:cfg['baseUrl']=base
+    if not cfg['model']:cfg['model']=model
+    mode=os.getenv('ZHIXUE_MODE','').strip().lower()
+    if row is None and mode in ('local','remote'):cfg['mode']=mode
+    return cfg
 
 def ai_public():
     import os
     cfg=config()
-    return {**cfg,'hasKey':bool(memory_key or os.getenv('ZHIXUE_API_KEY')),'note':'本地模式执行学情核对与行动规划流程；模型模式可读取工具结果并继续查询。行动草案需点击采纳才写入，数字核验不能替代人工复核。网页密钥仅存服务内存。'}
+    return {**cfg,'hasKey':bool(memory_key or os.getenv('ZHIXUE_API_KEY')),'note':'本地模式执行学情核对与行动规划流程；模型模式可读取工具结果并继续查询。行动草案需点击采纳才写入，数字核验不能替代人工复核。网页密钥仅存服务内存，也支持 .env 与 ZHIXUE_API_KEY 环境变量。'}
 
 class AISettings(BaseModel):
     mode:str='local'
@@ -59,6 +71,7 @@ def model_request(messages,tools=None):
     import os
     cfg=config();key=memory_key or os.getenv('ZHIXUE_API_KEY','')
     if not key:raise ValueError('尚未配置API密钥')
+    if not cfg['baseUrl'] or not cfg['model']:raise ValueError('尚未配置模型地址或名称')
     payload={'model':cfg['model'],'messages':messages,'temperature':0.1}
     if tools:payload.update({'tools':tools,'tool_choice':'auto'})
     with httpx.Client(timeout=18,follow_redirects=False) as client:

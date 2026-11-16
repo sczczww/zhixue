@@ -1,5 +1,7 @@
 """Start a private local demo. The database persists between runs."""
 import os
+from server.env import load_env
+load_env()
 os.environ.setdefault('OMP_NUM_THREADS','1')
 os.environ.setdefault('OPENBLAS_NUM_THREADS','1')
 import argparse

@@ -26,10 +26,12 @@ class AgentAcceptance(unittest.TestCase):
     def setUpClass(cls):
         cls.directory = tempfile.TemporaryDirectory(prefix="agent-", dir=Path(__file__).resolve().parent)
         cls.root = Path(cls.directory.name)
-        cls.environment = {k: os.environ.get(k) for k in ("ZHIXUE_DB", "ZHIXUE_DEMO", "ZHIXUE_API_KEY")}
+        cls.environment = {k: os.environ.get(k) for k in ("ZHIXUE_DB", "ZHIXUE_DEMO", "ZHIXUE_API_KEY", "ZHIXUE_MODE", "ZHIXUE_BASE_URL", "ZHIXUE_MODEL")}
         os.environ["ZHIXUE_DB"] = str(cls.root / "bootstrap.sqlite3")
         os.environ["ZHIXUE_DEMO"] = "1"
         os.environ.pop("ZHIXUE_API_KEY", None)
+        for key in ("ZHIXUE_MODE", "ZHIXUE_BASE_URL", "ZHIXUE_MODEL"):
+            os.environ.pop(key, None)
         from server import core, assistant, planning
         from server.seed import ensure_demo
         from server.main import app
