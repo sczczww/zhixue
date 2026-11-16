@@ -1,6 +1,6 @@
 {
   "title": "多风险异质原始记录验收",
-  "generatedAt": "2026-10-22T14:25:40.701856+00:00",
+  "generatedAt": "2026-11-06T11:31:46.119122+00:00",
   "evaluationType": "controlled_heterogeneous_rule_acceptance",
   "term": "2026-2027-1",
   "designCount": 20,
@@ -48,7 +48,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -67,6 +67,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -77,7 +78,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:44+00:00"
               },
               {
                 "kind": "grades",
@@ -85,12 +86,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:44+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -803,7 +806,7 @@
         },
         "overall": 3,
         "metrics": {
-          "gpa": 2.6,
+          "gpa": 3.35,
           "earnedCredits": 99.5,
           "failedCourses": 6,
           "failedCredits": 10.5,
@@ -822,6 +825,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -832,7 +836,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:44+00:00"
               },
               {
                 "kind": "grades",
@@ -840,12 +844,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:44+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -1575,7 +1581,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.7,
+          "gpa": 3.46,
           "earnedCredits": 110.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -1594,6 +1600,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -1604,7 +1611,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:44+00:00"
               },
               {
                 "kind": "grades",
@@ -1612,12 +1619,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:44+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -2339,7 +2348,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.73,
+          "gpa": 3.51,
           "earnedCredits": 110.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -2358,6 +2367,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -2368,7 +2378,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -2376,12 +2386,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -3098,7 +3110,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.77,
+          "gpa": 3.56,
           "earnedCredits": 110.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -3117,6 +3129,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -3127,7 +3140,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -3135,12 +3148,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -3858,7 +3873,7 @@
         },
         "overall": 1,
         "metrics": {
-          "gpa": 2.89,
+          "gpa": 3.55,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -3877,6 +3892,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -3887,7 +3903,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -3895,21 +3911,23 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
             {
               "label": "三个学期绩点变化",
               "value": [
-                3.625,
-                2.875,
-                2.125
+                4.0,
+                3.7000000000000006,
+                2.700000000000001
               ],
               "rule": "连续下降且首末差至少0.6",
               "source": "最近三个有成绩的学期"
@@ -4621,7 +4639,7 @@
         },
         "overall": 1,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -4640,6 +4658,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -4650,7 +4669,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -4658,12 +4677,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -5371,7 +5392,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -5390,6 +5411,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -5400,7 +5422,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -5408,12 +5430,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -6114,7 +6138,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 84.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -6133,6 +6157,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -6143,7 +6168,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -6151,12 +6176,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -6845,7 +6872,7 @@
         },
         "overall": 3,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 74.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -6864,6 +6891,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -6874,7 +6902,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -6882,12 +6910,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -7549,7 +7579,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -7568,6 +7598,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -7578,7 +7609,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -7586,12 +7617,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -8335,7 +8368,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 115.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -8354,6 +8387,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -8364,7 +8398,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -8372,12 +8406,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -9169,7 +9205,7 @@
         },
         "overall": 3,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 103.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -9188,6 +9224,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -9198,7 +9235,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -9206,12 +9243,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -9981,6 +10020,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": true,
             "latestGradedTermComplete": false,
+            "gpaTrendComparable": false,
             "historyComplete": false,
             "enrollmentComplete": true,
             "gradesThrough": null,
@@ -9991,7 +10031,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -9999,14 +10039,16 @@
                 "status": "partial",
                 "source": "场景明确删除历史成绩来源",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [
             "历史成绩尚未声明完整覆盖；即使已有部分成绩，也不能把缺记录当作漏修或真实学分缺口。已获学分为当前记录合计，模块缺口和后续负荷仅作待核对估算。"
           ],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -10155,6 +10197,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": false,
+            "gpaTrendComparable": false,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -10165,7 +10208,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -10173,12 +10216,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -10381,7 +10426,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.87,
+          "gpa": 3.69,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -10400,6 +10445,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": false,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -10410,7 +10456,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -10418,14 +10464,16 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:39+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [
             "最近有成绩学期尚未声明完整覆盖，均分和绩点仅描述已导入记录，不作为整学期低分或下降预警。"
           ],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -11138,7 +11186,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -11157,6 +11205,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -11167,7 +11216,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -11175,12 +11224,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -11899,7 +11950,7 @@
         },
         "overall": 1,
         "metrics": {
-          "gpa": 2.85,
+          "gpa": 3.66,
           "earnedCredits": 98.5,
           "failedCourses": 1,
           "failedCredits": 1.0,
@@ -11918,6 +11969,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -11928,7 +11980,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -11936,12 +11988,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "completion": [
@@ -12682,7 +12736,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.65,
+          "gpa": 3.41,
           "earnedCredits": 107.0,
           "failedCourses": 3,
           "failedCredits": 3.0,
@@ -12701,6 +12755,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -12711,7 +12766,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -12719,12 +12774,14 @@
                 "status": "complete",
                 "source": "全部当期课程已出分的组合风险场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -13458,7 +13515,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 99.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -13477,6 +13534,7 @@
             "hasCurrentEnrollment": false,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": false,
             "gradesThrough": "2025-2026-2",
@@ -13487,7 +13545,7 @@
                 "status": "partial",
                 "source": "场景明确缺少本期选课来源",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -13495,14 +13553,16 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [
             "本学期选课未确认完整覆盖，暂不依据未出现的课程判定漏选；已记录的明确超负荷仍可提示。"
           ],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -14128,7 +14188,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -14147,6 +14207,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -14157,7 +14218,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -14165,12 +14226,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -14836,7 +14899,7 @@
         },
         "overall": 3,
         "metrics": {
-          "gpa": 2.53,
+          "gpa": 3.25,
           "earnedCredits": 90.5,
           "failedCourses": 7,
           "failedCredits": 12.5,
@@ -14855,6 +14918,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -14865,7 +14929,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -14873,12 +14937,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -15561,7 +15627,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.65,
+          "gpa": 3.4,
           "earnedCredits": 103.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -15580,6 +15646,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -15590,7 +15657,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -15598,12 +15665,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -16278,7 +16347,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.69,
+          "gpa": 3.46,
           "earnedCredits": 103.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -16297,6 +16366,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -16307,7 +16377,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -16315,12 +16385,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -16990,7 +17062,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.74,
+          "gpa": 3.52,
           "earnedCredits": 103.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -17009,6 +17081,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -17019,7 +17092,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -17027,12 +17100,14 @@
                 "status": "complete",
                 "source": "全部当期课程均已出分的合成场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -17702,7 +17777,7 @@
         },
         "overall": 1,
         "metrics": {
-          "gpa": 2.94,
+          "gpa": 3.59,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -17721,6 +17796,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -17731,7 +17807,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -17739,21 +17815,23 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
             {
               "label": "三个学期绩点变化",
               "value": [
-                3.625,
-                2.875,
-                2.125
+                4.0,
+                3.7000000000000006,
+                2.7000000000000006
               ],
               "rule": "连续下降且首末差至少0.6",
               "source": "最近三个有成绩的学期"
@@ -18417,7 +18495,7 @@
         },
         "overall": 1,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -18436,6 +18514,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -18446,7 +18525,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -18454,12 +18533,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -19119,7 +19200,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -19138,6 +19219,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -19148,7 +19230,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -19156,12 +19238,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -19813,7 +19897,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 76.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -19832,6 +19916,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -19842,7 +19927,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -19850,12 +19935,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -20507,7 +20594,7 @@
         },
         "overall": 3,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 67.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -20526,6 +20613,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -20536,7 +20624,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -20544,12 +20632,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -21164,7 +21254,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -21183,6 +21273,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -21193,7 +21284,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -21201,12 +21292,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -21900,7 +21993,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 107.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -21919,6 +22012,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -21929,7 +22023,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -21937,12 +22031,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "progress": [
@@ -22710,7 +22806,7 @@
         },
         "overall": 3,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 100.0,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -22729,6 +22825,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -22739,7 +22836,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -22747,12 +22844,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "selection": [
@@ -23520,6 +23619,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": true,
             "latestGradedTermComplete": false,
+            "gpaTrendComparable": false,
             "historyComplete": false,
             "enrollmentComplete": true,
             "gradesThrough": null,
@@ -23530,7 +23630,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -23538,14 +23638,16 @@
                 "status": "partial",
                 "source": "场景明确删除历史成绩来源",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [
             "历史成绩尚未声明完整覆盖；即使已有部分成绩，也不能把缺记录当作漏修或真实学分缺口。已获学分为当前记录合计，模块缺口和后续负荷仅作待核对估算。"
           ],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -23706,6 +23808,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": false,
+            "gpaTrendComparable": false,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -23716,7 +23819,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -23724,12 +23827,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -23932,7 +24037,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.87,
+          "gpa": 3.69,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -23951,6 +24056,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": false,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -23961,7 +24067,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               },
               {
                 "kind": "grades",
@@ -23969,14 +24075,16 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:45+00:00"
               }
             ]
           },
           "dataNotes": [
             "最近有成绩学期尚未声明完整覆盖，均分和绩点仅描述已导入记录，不作为整学期低分或下降预警。"
           ],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -24641,7 +24749,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -24660,6 +24768,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -24670,7 +24779,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               },
               {
                 "kind": "grades",
@@ -24678,12 +24787,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },
@@ -25354,7 +25465,7 @@
         },
         "overall": 1,
         "metrics": {
-          "gpa": 2.84,
+          "gpa": 3.66,
           "earnedCredits": 89.5,
           "failedCourses": 1,
           "failedCredits": 1.0,
@@ -25373,6 +25484,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2025-2026-2",
@@ -25383,7 +25495,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               },
               {
                 "kind": "grades",
@@ -25391,12 +25503,14 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "completion": [
@@ -26089,7 +26203,7 @@
         },
         "overall": 2,
         "metrics": {
-          "gpa": 2.61,
+          "gpa": 3.35,
           "earnedCredits": 100.0,
           "failedCourses": 3,
           "failedCredits": 3.0,
@@ -26108,6 +26222,7 @@
             "hasCurrentEnrollment": true,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": true,
             "gradesThrough": "2026-2027-1",
@@ -26118,7 +26233,7 @@
                 "status": "complete",
                 "source": "显式构造的全部当期选课fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               },
               {
                 "kind": "grades",
@@ -26126,12 +26241,14 @@
                 "status": "complete",
                 "source": "全部当期课程已出分的组合风险场景",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               }
             ]
           },
           "dataNotes": [],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {
           "performance": [
@@ -26817,7 +26934,7 @@
         },
         "overall": 0,
         "metrics": {
-          "gpa": 2.88,
+          "gpa": 3.7,
           "earnedCredits": 90.5,
           "failedCourses": 0,
           "failedCredits": 0,
@@ -26836,6 +26953,7 @@
             "hasCurrentEnrollment": false,
             "historyNeedsVerification": false,
             "latestGradedTermComplete": true,
+            "gpaTrendComparable": true,
             "historyComplete": true,
             "enrollmentComplete": false,
             "gradesThrough": "2025-2026-2",
@@ -26846,7 +26964,7 @@
                 "status": "partial",
                 "source": "场景明确缺少本期选课来源",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               },
               {
                 "kind": "grades",
@@ -26854,14 +26972,16 @@
                 "status": "complete",
                 "source": "按全部应修课程构造的完整历史成绩fixture",
                 "confirmedBy": "scenario-builder",
-                "updatedAt": "2026-10-22T14:25:40+00:00"
+                "updatedAt": "2026-11-06T11:31:46+00:00"
               }
             ]
           },
           "dataNotes": [
             "本学期选课未确认完整覆盖，暂不依据未出现的课程判定漏选；已记录的明确超负荷仍可提示。"
           ],
-          "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"
+          "gpaMethod": "按校教务〔2024〕8号第十二条将百分制记载成绩分档换算，再按课程学分加权。任选课不计入平均绩点，课程性质待核实的单独提示。",
+          "gpaSource": "https://www5.zzu.edu.cn/__local/9/4B/6E/0D5C783280332442F426D639EBE_CED7A822_48019B.pdf#page=5",
+          "gpaPendingCourses": 0
         },
         "evidence": {}
       },

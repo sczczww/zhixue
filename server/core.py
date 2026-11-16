@@ -18,10 +18,17 @@ def now():
     return datetime.now(timezone.utc).isoformat(timespec='seconds')
 
 def db_path():
-    return Path(os.getenv('ZHIXUE_DB',str(ROOT/'var/zhixue.sqlite3')))
+    filename='shared-demo.sqlite3' if is_public_demo() else 'zhixue.sqlite3'
+    path=Path(os.getenv('ZHIXUE_DB',str(ROOT/'var'/filename)))
+    if is_public_demo() and path.resolve()==(ROOT/'var/zhixue.sqlite3').resolve():
+        raise ValueError('共享体验请使用单独的模拟数据库')
+    return path
 
 def is_demo():
     return os.getenv('ZHIXUE_DEMO','1')=='1'
+
+def is_public_demo():
+    return os.getenv('ZHIXUE_PUBLIC_DEMO','0')=='1'
 
 @contextmanager
 def connection():
@@ -87,9 +94,21 @@ def current_user(request:Request):
     with connection() as conn:
         row=conn.execute('SELECT u.id,u.name,u.role FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=? AND s.expires>?',(hashlib.sha256(token.encode()).hexdigest(),time.time())).fetchone()
     if not row: raise HTTPException(401,'请先登录')
+    if is_public_demo() and row['role']=='admin':
+        raise HTTPException(403,'共享体验仅开放学生和辅导员身份')
     return dict(row)
 
+def issue_session(conn, request, response, user, action='登录'):
+    if is_public_demo() and user['role']=='admin':
+        raise HTTPException(403,'共享体验仅开放学生和辅导员身份')
+    token=secrets.token_urlsafe(40)
+    conn.execute('DELETE FROM sessions WHERE expires<?',(time.time(),))
+    conn.execute('INSERT INTO sessions VALUES (?,?,?)',(hashlib.sha256(token.encode()).hexdigest(),user['id'],time.time()+28800))
+    audit(conn,user['id'],action,{'role':user['role']})
+    response.set_cookie('zhixue',token,max_age=28800,httponly=True,samesite='strict',secure=request.url.scheme=='https')
+
 def require_admin(user):
+    if is_public_demo(): raise HTTPException(403,'共享体验不开放管理操作')
     if user['role']!='admin': raise HTTPException(403,'该操作需要管理员身份')
 
 def visible_student(conn,user,student_id):

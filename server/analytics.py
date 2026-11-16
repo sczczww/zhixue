@@ -14,7 +14,7 @@ def build_analytics(conn, profiles):
     vectors={key:[] for key in ('performance','completion','progress','selection')}
     for p in profiles:
         sid=p['student']['id'];m=p['metrics'];trend=p['trend']
-        grades=[r['gpa'] for r in trend]
+        grades=[r['gpa'] for r in trend if _finite(r['gpa']) and not r.get('pendingNature')]
         gpa_std=(sum((g-sum(grades)/len(grades))**2 for g in grades)/len(grades))**.5 if grades else None
         vectors['performance'].append([p['student']['gpa'],m.get('latestScore'),grades[-1]-grades[0] if len(grades)>1 else None,gpa_std])
         history=attempts[sid]

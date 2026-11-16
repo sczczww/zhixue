@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#203c72"><title>校园工作台 · 知学</title>
+<link rel="stylesheet" href="/assets/campus.css?v=b1-119"><script defer src="/assets/campus-routes.js?v=b1-119"></script><script defer src="/assets/campus-host.js?v=b1-119"></script></head>
+<body class="campus-host">
+<header class="portal-bar"><a id="menu-toggle" class="portal-menu-trigger" href="/campus"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>主菜单</a>
+<div class="portal-brand"><span class="campus-seal" aria-hidden="true">知</span><span>郑州大学</span><b>本科教学服务 · 知学</b></div>
+<div class="portal-tools"><label class="portal-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="service-search" type="search" aria-label="快速查找服务" placeholder="查找服务" autocomplete="off" aria-controls="service-menu" aria-expanded="false"></label>
+<span class="environment" id="host-mode"></span><button id="host-notices" class="portal-tool" title="站内通知" aria-label="站内通知" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14l-2-3V9a5 5 0 0 0-10 0v5l-2 3Zm5 3h4"/></svg></button>
+<button id="host-account" class="role-chip" disabled>未登录</button></div></header>
+<nav class="work-tabs" id="work-tabs" aria-label="已打开的服务"><div id="directory-tab" class="work-tab"><a id="home-tab" href="/campus">全部服务</a></div><div id="business-tabs"></div></nav>
+<aside id="service-menu" class="service-menu" aria-label="服务搜索结果" hidden><div class="menu-heading"><strong>查找服务</strong><button id="menu-close" aria-label="关闭搜索结果">×</button></div><div id="menu-list"></div><a class="original-entry" href="/campus" id="finder-home">查看全部服务</a></aside>
+<main class="portal-pane"><div class="portal-crumb"><span class="where">您的当前位置：</span><button id="crumb-menu">全部服务</button><i>»</i><span id="crumb-group">学业支持</span><i>»</i><strong id="crumb-title">校园工作台</strong><button id="refresh-view">刷新</button></div>
+<iframe id="business" title="学业支持业务内容" referrerpolicy="origin"></iframe></main>
+<div id="menu-shade" class="menu-shade" hidden></div><noscript>请启用 JavaScript 以打开学业支持工作台。</noscript></body></html>

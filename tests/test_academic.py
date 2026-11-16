@@ -10,7 +10,21 @@ import time
 import unittest
 
 from fastapi.testclient import TestClient
-from server import core, academic, data_quality
+from server import core, academic, data_quality, grading
+
+
+class GradePointScale(unittest.TestCase):
+    def test_all_percentile_band_edges_and_unpublished_scores(self):
+        for low,high,expected in [(0,59,0.0),(60,64,1.2),(65,69,1.7),(70,74,2.2),
+                                  (75,79,2.7),(80,84,3.2),(85,89,3.7),(90,100,4.0)]:
+            for score in range(low,high+1):
+                with self.subTest(score=score):
+                    self.assertEqual(academic.grade_point(score),expected)
+        self.assertEqual(academic.grade_point(89.9),3.7)
+        self.assertEqual(academic.grade_point(59.9),0.0)
+        self.assertIsNone(academic.grade_point(None))
+        for invalid in (-1,101,float("nan"),float("inf")):
+            with self.assertRaises(ValueError): academic.grade_point(invalid)
 
 
 class IsolatedDatabase(unittest.TestCase):
@@ -73,6 +87,59 @@ class AcademicCases(IsolatedDatabase):
         self.assertTrue(result["metrics"]["currentGradesPending"])
         self.recompute()
         self.assertFalse(any(a["kind"] == "performance" for a in self.profile()["alerts"]))
+
+    def test_gpa_weights_after_conversion_and_separates_free_electives(self):
+        self.course("limited",2,1,required=False,metadata={"courseNature":"限选"})
+        self.course("free",9,1,required=False,metadata={"submodule":"进阶任选"})
+        self.course("unpassed",1,1)
+        for cid,score in (("old",89),("limited",80),("free",100),("unpassed",59)):
+            self.record(cid,score)
+        self.record("now",None,core.TERM)
+        p=self.profile()
+        self.assertEqual(p["student"]["gpa"],3.03)  # (4×3.7 + 2×3.2 + 1×0) / 7
+        self.assertEqual(p["trend"][0]["gpa"],3.03)
+        self.assertEqual(p["credits"]["earned"],15)
+        rows=self.client("2024CS001").get("/api/students/2024CS001/transcript").json()["items"]
+        actual={r["code"]:(r["gradePoint"],r["gpaScope"]) for r in rows}
+        self.assertEqual(actual["free"],(4.0,"excluded"))
+        self.assertEqual(actual["limited"],(3.2,"included"))
+        self.assertEqual(actual["unpassed"],(0.0,"included"))
+        self.assertIsNone(actual["now"][0])
+
+    def test_courses_with_unknown_nature_are_separate_from_confirmed_optional_courses(self):
+        from server import analytics
+        self.course("free",2,1,required=False,metadata={"courseNature":"任选"})
+        self.course("unclassified",3,1,required=False)
+        self.record("free",90)
+        self.record("unclassified",80)
+        p=self.profile()
+        self.assertEqual(p["metrics"]["gpaPendingCourses"],1)
+        self.assertIsNone(p["student"]["gpa"])
+        self.assertIsNone(p["trend"][0]["gpa"])
+        self.assertEqual(p["trend"][0]["score"],84)
+        self.assertTrue(p["metrics"]["dataQuality"]["hasAssessments"])
+        with core.connection() as db: analytics.build_analytics(db,[p])
+        self.record("old",85)
+        p=self.profile()
+        self.assertEqual(p["student"]["gpa"],3.7)
+        self.assertTrue(any("绩点统计范围待核对" in n for n in p["metrics"]["dataNotes"]))
+
+    def test_grade_scale_upgrade_rechecks_only_performance_and_preserves_case_history(self):
+        for term,score in (("2024-2025-1",95),("2024-2025-2",90),("2025-2026-1",87)):
+            self.record("old",score,term)
+        with core.connection() as db:
+            data_quality.set_coverage(db,"2024CS001","grades","2025-2026-1","complete","测试成绩","admin")
+            for key,kind,evidence in (("ZX-GPA","performance",[{"label":"三个学期绩点变化"}]),("ZX-OTHER","completion",[])):
+                db.execute("INSERT INTO alerts VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                           (key,"2024CS001",core.TERM,kind,1,"测试预警",json.dumps(evidence,ensure_ascii=False),"[]","contacted",1,"C01","2026-01-01","2026-01-01"))
+            db.execute("INSERT INTO case_events(alert_id,actor_id,action,note,created_at) VALUES('ZX-GPA','C01','contacted','已经核对','2026-01-01')")
+            academic.refresh_gpa_policy(db)
+            academic.refresh_gpa_policy(db)
+            case=db.execute("SELECT active,status FROM alerts WHERE id='ZX-GPA'").fetchone()
+            self.assertEqual(tuple(case),(0,"contacted"))
+            self.assertEqual([r[0] for r in db.execute("SELECT action FROM case_events WHERE alert_id='ZX-GPA' ORDER BY id")],["contacted","risk_cleared"])
+            self.assertEqual(tuple(db.execute("SELECT active,updated_at FROM alerts WHERE id='ZX-OTHER'").fetchone()),(1,"2026-01-01"))
+            self.assertIn(grading.POLICY_ID,db.execute("SELECT value FROM settings WHERE key='gpa_policy'").fetchone()[0])
 
     def test_absent_history_does_not_imply_missed_old_courses(self):
         self.record("now", None, core.TERM)

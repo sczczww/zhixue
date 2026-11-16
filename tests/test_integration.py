@@ -84,6 +84,44 @@ class IntegrationAcceptance(unittest.TestCase):
         self.assertEqual(response.status_code, 200, response.text)
         return response.json()
 
+    def test_public_demo_uses_a_separate_default_database(self):
+        with patch.dict(os.environ, {"ZHIXUE_PUBLIC_DEMO":"1"}):
+            previous=os.environ.pop("ZHIXUE_DB")
+            try:
+                self.assertEqual(self.core.db_path(),self.core.ROOT/"var/shared-demo.sqlite3")
+                os.environ["ZHIXUE_DB"]=str(self.core.ROOT/"var/zhixue.sqlite3")
+                with self.assertRaises(ValueError): self.core.db_path()
+            finally:
+                os.environ["ZHIXUE_DB"]=previous
+
+    def test_public_demo_limits_accounts_and_rejects_admin_login(self):
+        with patch.dict(os.environ, {"ZHIXUE_PUBLIC_DEMO":"1"}):
+            accounts=self.client.get("/api/demo-accounts").json()["accounts"]
+            self.assertEqual({a["role"] for a in accounts},{"student","counselor"})
+            self.assertTrue(self.client.get("/api/status").json()["publicDemo"])
+            denied=self.client.post("/api/login",json={"username":"admin","password":"demo123"})
+            self.assertEqual(denied.status_code,403)
+            self.login(self.subject["id"])
+            self.assertEqual(self.client.get("/api/students/"+self.subject["id"]).status_code,200)
+            self.assertEqual(self.client.get("/api/admin/ai").status_code,403)
+
+    def test_public_demo_invalidates_existing_admin_session(self):
+        self.login("admin")
+        with patch.dict(os.environ, {"ZHIXUE_PUBLIC_DEMO":"1"}):
+            self.assertEqual(self.client.get("/api/session").status_code,403)
+            self.assertEqual(self.client.get("/api/admin/audit").status_code,403)
+            self.login("C01")
+            self.assertEqual(self.client.get("/api/overview").status_code,200)
+
+    def test_public_demo_uses_local_assistant_and_disables_portal_tickets(self):
+        with self.core.connection() as db:
+            db.execute("INSERT OR REPLACE INTO settings(key,value) VALUES('ai',?)",
+                       (json.dumps({"mode":"remote","baseUrl":"https://example.invalid","model":"test"}),))
+        with patch.dict(os.environ, {"ZHIXUE_PUBLIC_DEMO":"1","ZHIXUE_CAMPUS_LAUNCH_KEY":"x"*40}):
+            self.assertEqual(self.client.get("/api/status").json()["ai"]["mode"],"local")
+            response=self.client.post("/api/campus/tickets",json={"userId":self.subject["id"]},headers={"Authorization":"Bearer "+"x"*40})
+            self.assertEqual(response.status_code,404)
+
     def test_anonymous_and_header_spoof_do_not_authenticate(self):
         self.assertEqual(self.client.get("/api/status").json()["students"], 144)
         for endpoint in ("/api/session", "/api/students", "/api/alerts", "/api/admin/audit"):

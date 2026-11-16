@@ -9,12 +9,14 @@ from urllib.parse import urlsplit
 import httpx
 from fastapi import APIRouter,Depends,HTTPException
 from pydantic import BaseModel,Field
-from .core import connection,current_user,require_admin,visible_student,curriculum,audit,TERM
+from .core import connection,current_user,require_admin,visible_student,curriculum,audit,TERM,is_public_demo
 
 router=APIRouter()
 memory_key=''
 
 def config():
+    if is_public_demo():
+        return {'mode':'local','baseUrl':'','model':''}
     with connection() as db:
         row=db.execute("SELECT value FROM settings WHERE key='ai'").fetchone()
     return json.loads(row['value']) if row else {'mode':'local','baseUrl':'','model':''}

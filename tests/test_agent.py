@@ -373,7 +373,7 @@ class AgentAcceptance(unittest.TestCase):
         result = self.ask("我的学分进度怎么样？")
         self.assertEqual([s["tool"] for s in result["steps"]], ["student_brief", "audit_curriculum"])
         self.assertIn("已获", result["answer"].split("\n\n")[0])
-        self.assertNotIn("累计演示绩点", result["answer"])
+        self.assertNotIn("累计绩点", result["answer"])
         self.assertNotIn("当前风险依据", result["answer"])
 
     def test_warning_question_leads_with_trigger_evidence(self):

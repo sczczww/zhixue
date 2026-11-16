@@ -1,0 +1,220 @@
+/* The host owns navigation; the embedded service owns one white business page. */
+.campus-host,.campus-module {
+  --navy:#203c72;--blue:#28569c;--link:#215da4;--line:#dce4ee;--light:#f2f6fb;--ink:#23354c;--muted-ink:#55677b;
+  font-family:"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);
+}
+.campus-host *,.campus-module * {box-sizing:border-box}
+.campus-host{margin:0;display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;background:linear-gradient(158deg,#254986 0%,#416ba5 40%,#91aeca 100%);font-size:14px}
+.campus-host button,.campus-host input{font:inherit}
+.campus-host button{cursor:pointer}
+.campus-host :focus-visible,.campus-module :focus-visible{outline:2px solid #2364af;outline-offset:2px}
+.portal-bar :focus-visible,.work-tabs :focus-visible{outline-color:#fff}
+.portal-bar{display:flex;align-items:center;gap:19px;padding:0 17px;height:45px;flex:none;background:var(--navy);color:#fff}
+.portal-bar button{border:none;background:none;color:inherit}
+.portal-menu-trigger{display:flex;align-items:center;gap:5px;padding:7px 6px 7px 0;white-space:nowrap}
+.portal-menu-trigger,.work-tab a{color:inherit;text-decoration:none}
+.portal-menu-trigger svg,.portal-search svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.portal-menu-trigger:hover,.work-tab a:hover{text-decoration:underline}
+.portal-brand{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.portal-brand>span:nth-child(2){font-family:"STKaiti","KaiTi","Microsoft YaHei",serif;font-size:22px;font-weight:700;letter-spacing:.055em}
+.portal-brand b{font-size:13px;font-weight:600;border-left:1px solid #7489aa;padding-left:10px}
+.campus-seal{display:inline-grid;place-items:center;width:29px;height:29px;border:1.5px solid #dde6f6;outline:1px solid #8fa7c7;outline-offset:-4px;border-radius:50%;font-family:serif;font-weight:700}
+.portal-tools{margin-left:auto;display:flex;align-items:center;gap:12px;min-width:0}
+.portal-search{display:flex;gap:7px;align-items:center;background:#405b89;border-radius:3px;padding:4px 9px;height:27px}
+.portal-search input{background:transparent;border:none;color:white;width:clamp(85px,13vw,225px);outline-offset:3px}
+.portal-search input::placeholder{color:#e0e7f0}
+.environment{color:#dae5f6;font-size:12px;white-space:nowrap}
+.portal-tool{padding:3px;display:flex}.portal-tool svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.6}
+.portal-bar .role-chip{border:1px solid #a1b3d2;border-radius:12px;font-size:12px;line-height:19px;padding:0 9px;white-space:nowrap}
+.portal-tool:disabled,.role-chip:disabled{opacity:.65;cursor:default}
+.work-tabs{height:44px;flex:none;display:flex;align-items:stretch;gap:2px;padding:0 20px;overflow-x:auto;scrollbar-width:thin}
+.work-tab{display:flex;align-items:center;position:relative;border-radius:3px 3px 0 0;color:#e4edfc;padding:0 8px}
+.work-tab.selected{color:#fff;font-weight:700;background:#ffffff12}
+.work-tab.selected::after{content:"";position:absolute;bottom:4px;left:13px;right:13px;height:2px;background:#c7dbff}
+.work-tab button{border:0;background:transparent;color:inherit;white-space:nowrap;font-size:14px;padding:7px 5px}
+.work-tab .tab-close{font-size:14px;color:#d5e1f6;padding:4px}
+.work-tab.idle{padding:0 13px}
+#business-tabs{display:contents}
+#home-tab{font-size:14px;white-space:nowrap;padding:7px 6px}
+.at-directory .portal-crumb,.at-directory .portal-search{display:none}
+.portal-pane{margin:0 20px 18px;background:white;display:flex;flex:1;min-height:0;flex-direction:column;overflow:hidden;border-radius:5px;box-shadow:0 2px 10px #182d4c1b}
+.portal-crumb{display:flex;align-items:center;gap:12px;padding:5px 12px;min-height:32px;border-bottom:1px solid #edf0f4;font-size:12px;color:#58687a;white-space:nowrap;overflow-x:auto}
+.portal-crumb button,.campus-link,.tree-actions button{color:var(--link);border:0;background:none;font:inherit;cursor:pointer;padding:2px 0;text-decoration:none}
+.portal-crumb i{color:#a0adba;font-style:normal}.portal-crumb strong{font-weight:500;color:#35485f}
+.portal-crumb #refresh-view{background:#edf3fb;padding:2px 7px;border-radius:2px}
+#business{border:0;width:100%;flex:1;min-height:0;background:white}
+.service-menu{position:fixed;z-index:6;top:45px;right:12px;background:white;border:1px solid #cbd7e5;box-shadow:0 10px 30px #19355238;width:min(340px,calc(100vw - 24px));max-height:calc(100dvh - 56px);overflow:auto;border-radius:0 0 5px 5px}
+.menu-heading,.original-entry{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--light)}
+.menu-heading button{border:none;background:none;color:var(--muted-ink);font-size:20px}
+#menu-list{padding:3px 16px 12px}.menu-hint{color:var(--muted-ink)}
+#menu-list section{padding:6px 0;border-bottom:1px solid var(--line)}#menu-list section:last-child{border:0}
+#menu-list h2{font-size:12px;margin:5px 0;color:var(--muted-ink);font-weight:600}
+#menu-list section button{border:0;background:white;color:var(--ink);padding:7px 8px;margin:1px;text-align:left;border-radius:2px}
+#menu-list section button:hover,#menu-list section button.selected{background:#e8f1ff;color:var(--link)}
+.original-entry{font-size:13px;color:var(--link);text-decoration:none;border-top:1px solid var(--line)}
+.menu-shade{position:fixed;inset:45px 0 0;z-index:4;background:#152c4c20}
+.campus-host [hidden],.campus-module [hidden]{display:none!important}
+.campus-module{
+  --color-ink:var(--ink);--color-text:#36465a;--color-muted:var(--muted-ink);--color-canvas:#fff;--color-subtle:var(--light);
+  --color-border:var(--line);--color-border-strong:#8197b0;--color-primary:var(--blue);--color-primary-hover:#1d467d;--color-primary-soft:#e8f0fa;
+  --color-focus:#2464a8;--color-accent:#d3e4f8;--color-on-primary-muted:#c8daef;--color-chart-1:#3468a2;
+  --text:var(--ink);--muted:var(--muted-ink);--forest:var(--blue);--paper:white;--accent:#d3e4f8;--border:var(--line);
+  background:#fff;min-height:100vh;margin:0;font-size:14px;line-height:1.55;
+}
+.campus-module .business-body,.campus-entry{width:min(1170px,100%);margin:0 auto;padding:12px 20px 38px}
+.campus-page{min-width:0}.campus-loading{color:var(--muted-ink);padding:28px}
+.service-directory{padding:18px 0 6px}
+.directory-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:15px;border-bottom:1px solid var(--line)}
+.directory-head h1{color:var(--ink);font-size:23px;line-height:1.4;letter-spacing:0;margin:0}
+.directory-search{display:flex;align-items:center;gap:8px;width:min(245px,55%);min-height:34px;padding:0 9px;border:1px solid #b9c7d6;border-radius:3px;color:var(--muted-ink);background:white}
+.directory-search:focus-within{border-color:var(--blue)}
+.directory-search .ico{width:16px;height:16px;flex:none}
+.directory-search input[type="search"]{width:100%;min-width:0;height:30px;margin:0;padding:1px;border:0;border-radius:0;background:transparent;color:var(--ink);font:inherit;font-size:13px}
+.directory-role{display:flex;gap:0;margin:16px 0 3px}
+.directory-role button{background:white;color:var(--link);border:1px solid #b9c7d6;padding:5px 13px;font:inherit;font-size:13px;cursor:pointer}
+.directory-role button:first-child{border-radius:3px 0 0 3px}.directory-role button:last-child{border-radius:0 3px 3px 0}
+.directory-role button+button{margin-left:-1px}.directory-role button[aria-pressed="true"]{background:var(--blue);color:white;border-color:var(--blue)}
+.directory-demo-note{font-size:12px;margin:6px 0;color:var(--muted-ink)}
+.directory-session{display:flex;align-items:center;gap:15px;margin-top:14px;font-size:13px;color:var(--muted-ink)}
+.directory-session button{border:0;background:transparent;color:var(--link);padding:3px 0;font:inherit;cursor:pointer}
+.directory-session button:hover{text-decoration:underline}
+.directory-groups{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 30px;padding:21px 0 25px}
+.directory-group h2{font-size:16px;line-height:1.5;font-weight:650;color:var(--ink);letter-spacing:0;margin:0 0 7px;padding:0 0 8px;border-bottom:1px solid var(--line)}
+.directory-group ul{padding:0;margin:0;list-style:none}.directory-group li{margin:0;list-style:none}
+.directory-group button,.directory-empty button{display:inline-block;text-align:left;background:transparent;border:0;color:var(--link);padding:6px 0;font:inherit;font-size:14px;line-height:1.5;cursor:pointer}
+.directory-group button:hover,.directory-footer a:hover,.directory-empty button:hover{text-decoration:underline}
+.directory-group .school-service,#menu-list a{display:inline-block;padding:6px 0;color:var(--link);font-size:14px;text-decoration:none}
+.school-service small{font-size:12px;color:var(--muted-ink);white-space:nowrap}
+.school-menu-path{display:block;margin:0 0 4px;color:var(--muted-ink);font-size:12px}
+.school-service:hover,#menu-list a:hover{text-decoration:underline}
+.project-services{grid-column:1/-1}
+.project-services h2{color:var(--navy);border-bottom-color:#bdcde2}
+.project-services ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 14px}
+.project-services button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 5px}
+.service-symbol{display:grid;place-items:center;background:var(--light);border:1px solid var(--line);color:var(--blue);width:32px;height:32px;flex:none;border-radius:3px}
+.project-services strong,.project-services small{display:block}.project-services strong{font-size:14px;font-weight:600}
+.project-services small{font-size:12px;color:var(--muted-ink);margin-top:2px}
+.school-reference,.risk-alert-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px 13px;background:var(--light);border:1px solid var(--line);padding:8px 11px;margin:8px 0;font-size:13px}
+.school-reference a{color:var(--link)}.school-reference span,.risk-alert-row>span:not(.badge){color:var(--muted-ink)}
+.risk-alert-row .campus-link{margin-left:auto}.risk-review-note{color:var(--color-warning);background:var(--color-warning-soft);padding:9px 12px}
+.risk-credit-sentence,.risk-details,.risk-comparison{font-size:14px}.risk-credit-sentence{margin:8px 0}
+.risk-details{border:1px solid var(--line);margin-top:9px}.risk-details summary{padding:8px 11px;color:var(--link);cursor:pointer}
+.risk-details .business-note{padding:0 11px}.risk-details .business-table-wrap{border:0;border-top:1px solid var(--line)}
+.risk-comparison{padding:12px 14px;background:var(--light);border:1px solid var(--line);margin-top:12px}
+.risk-comparison h3{font-size:15px;margin:0}.risk-comparison p,.risk-comparison ul{margin:7px 0}.risk-comparison ul{padding-left:18px}
+.choice-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:white;border:1px solid var(--line);margin:10px 0}
+.choice-option{padding:10px 13px}.choice-option+.choice-option{border-left:1px solid var(--line)}
+.choice-option h4{margin:0 0 4px;font-size:15px}.choice-option>strong{display:block;margin:5px 0;color:var(--navy)}
+@media(max-width:600px){.choice-options{grid-template-columns:1fr}.choice-option+.choice-option{border-left:0;border-top:1px solid var(--line)}}
+@media(max-width:700px){.project-services ul{grid-template-columns:1fr;gap:0}.project-services button{padding:7px 0}.risk-alert-row .campus-link{margin-left:0}}
+.directory-footer{display:flex;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding:13px 0;font-size:13px}
+.directory-footer a{color:var(--link);text-decoration:none}.directory-empty{grid-column:1 / -1;color:var(--muted-ink);padding:13px 0}
+@media(max-width:820px){.directory-groups{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px}}
+@media(max-width:700px){.service-directory{padding:9px 2px}.directory-head{gap:8px;padding-bottom:10px}.directory-head h1{font-size:20px}.directory-group button{min-height:37px}.directory-groups{padding:17px 0 19px}}
+@media(max-width:335px){.directory-head{align-items:flex-start;flex-direction:column}.directory-search{width:100%}.directory-groups{column-gap:12px}}
+.business-title,.section-line,.business-actions,.business-meta,.business-filter,.tree-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.business-title{justify-content:space-between;border-bottom:1px solid var(--line);padding:1px 0 9px;margin-bottom:13px;min-height:39px}
+.business-title h1,.campus-entry h1{font-size:19px;letter-spacing:0;font-weight:650;color:#1f2d40;margin:0}
+.business-title>div{display:flex;gap:8px}
+.business-meta{color:var(--muted-ink);font-size:13px;margin-bottom:13px}.business-meta strong{color:var(--ink);font-size:14px}
+.business-subtitle{margin:20px 0 9px;font-size:15px;font-weight:650;line-height:1.5;letter-spacing:0}
+.section-line{justify-content:space-between;align-items:baseline;margin:18px 0 8px}
+.section-line .business-subtitle{margin:0}
+.campus-module button,.campus-module input,.campus-module select{font-family:inherit}
+.campus-link,.tree-actions button{font-size:13px}
+.campus-link:hover,.tree-actions button:hover,.original-entry:hover,.portal-crumb button:hover{text-decoration:underline}
+.campus-button,.solo-bar button{border:1px solid #b5c5d8;border-radius:3px;background:white;color:var(--link);padding:5px 12px;font-size:13px;cursor:pointer;min-height:30px}
+.campus-button.is-primary{color:#fff;background:var(--blue);border-color:var(--blue)}.campus-button:hover{border-color:var(--link);background:#edf4fe}.campus-button.is-primary:hover{background:#204881}
+.credit-strip{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid #d3dfec;background:#f3f7fc;margin:12px 0 14px;padding:12px 0}
+.credit-strip>div{padding:0 20px;border-left:1px solid #d1deeb}.credit-strip>div:first-child{border:0}
+.credit-strip dt{font-size:13px;color:#445a74}.credit-strip dd{color:#234672;margin:0;font-size:27px;font-weight:650;line-height:1.4;font-variant-numeric:tabular-nums}
+.credit-strip dd small{font-size:12px;font-weight:400;margin-left:5px;color:var(--muted-ink)}
+.credit-strip dd.metric-hint{font-size:12px;font-weight:400;color:var(--muted-ink)}
+.mobile-credit-summary{display:none}
+.business-filter{background:#f6f8fb;border:1px solid var(--line);padding:9px 12px;margin:8px 0 10px;font-size:13px}
+.business-filter label{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.business-filter select{width:auto;max-width:100%}
+.business-filter input:not([type=checkbox]),.business-filter select,.solo-bar select{border:1px solid #b9c7d6;background:white;color:var(--ink);padding:4px 7px;border-radius:3px;min-height:29px;font-size:13px}
+.business-filter input[type=checkbox]{accent-color:var(--blue);width:15px;height:15px}
+.business-table-wrap{max-width:100%;overflow:auto;border:1px solid var(--line);border-radius:2px}
+.campus-module .business-table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.45;min-width:0;margin:0}
+.campus-module .business-table th,.campus-module .business-table td{text-align:left;padding:8px 11px;border:0;border-bottom:1px solid #e4eaf1;white-space:normal;background:transparent}
+.campus-module .business-table th{font-size:12px;background:#eef3f9;color:#3e536e;font-weight:600;white-space:nowrap}
+.business-table tr:nth-child(even){background:#fafbfd}.business-table tbody tr:last-child td{border-bottom:0}
+.business-table td{font-variant-numeric:tabular-nums}.business-table td strong{font-weight:550;color:var(--ink)}
+.table-sub{display:block;color:var(--muted-ink);font-size:12px;margin-top:2px}
+.course-flag{color:#53667b;white-space:nowrap}.course-flag.pass{color:#236644}.course-flag.risk{color:#963d2f}
+.business-note{color:var(--muted-ink);font-size:13px;margin:9px 0}
+.school-portrait{container-type:inline-size}
+.sheet-identity{margin:8px 0}
+.sheet-assessment{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 11px;font-size:13px;color:var(--muted-ink)}
+.sheet-assessment b{font-weight:600;color:var(--ink)}.sheet-assessment .campus-link{margin-left:auto}
+.profile-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 0;background:var(--light);border-block:1px solid var(--line);padding:10px 0;margin:12px 0 15px}
+.profile-facts>div{padding:0 14px;border-left:1px solid var(--line)}.profile-facts>div:first-child{border-left:0}
+.profile-facts dt,.profile-facts .fact-detail{color:var(--muted-ink);font-size:12px;font-weight:400;line-height:1.5}
+.profile-facts dd{margin:2px 0 0;color:var(--navy);font-size:19px;line-height:1.3;font-weight:600;font-variant-numeric:tabular-nums}
+.sheet-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,295px),1fr));gap:0 18px}
+.sheet-pair .sheet-compact{min-width:0}.campus-module .sheet-compact .business-table{min-width:0}
+.sheet-detail{border:1px solid var(--line);margin-top:8px;background:white}
+.sheet-detail>summary{padding:8px 11px;cursor:pointer;color:var(--link);font-size:13px}
+.sheet-detail .business-note,.sheet-detail .credit-row{margin:8px 11px}
+.sheet-detail .business-table-wrap{border:0;border-top:1px solid var(--line)}
+.sheet-detail .business-filter{margin:8px}.sheet-detail .table-bottom{padding:7px 10px}
+campus-gpa-chart{display:block;position:relative;width:100%;height:180px;color:var(--muted-ink);font-size:13px}
+.record-filters input[type=search]{width:clamp(145px,18vw,245px);max-width:100%}
+.register-caption,.register-bottom,.register-pages{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.register-caption{font-size:13px;justify-content:space-between;margin:12px 0 7px}
+.register-caption span,.register-bottom{font-size:12px;color:var(--muted-ink)}.register-bottom{justify-content:flex-end;margin-top:8px}
+.overview-services,.overview-services #overview-inbox{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.overview-services{justify-content:space-between}.overview-services .btn{min-height:30px;padding:4px 9px;font-size:13px}
+.overview-levels{color:var(--muted-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.register-pages button{background:white;border:1px solid var(--line);color:var(--link);border-radius:3px;padding:4px 9px;cursor:pointer}
+.register-pages button:disabled{color:var(--muted-ink);opacity:.65;cursor:default}
+.review-due .table-sub{color:var(--color-warning)}
+@container(max-width:490px){.profile-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-facts>div:nth-child(odd){border-left:0}}
+@media(max-width:700px){.record-filters label{max-width:100%}.register-caption{gap:4px 10px}.register-pages button{min-height:34px}.sheet-assessment .campus-link{margin-left:0}}
+.course-branch,.special-checks{border:1px solid var(--line);border-bottom:0}
+.course-branch:last-child,.special-checks{border-bottom:1px solid var(--line)}
+.course-branch>summary,.child-branch>summary,.special-checks>summary{cursor:pointer;padding:9px 12px;font-size:14px;color:#294969;list-style-position:inside}
+.course-branch>summary{background:#f1f5fa;font-weight:600}
+.child-branch>summary{padding-left:27px;border-top:1px solid var(--line)}
+.course-branch summary small{margin-left:15px;font-size:12px;color:var(--muted-ink);font-weight:400}
+.child-branch .business-table-wrap{margin:0 10px 8px 26px}.special-checks{margin-top:16px}
+.business-actions{margin-top:18px}.reconcile-result{padding:12px 14px;border:1px solid var(--line);background:#f4f7fb}
+.reconcile-result strong,.reconcile-result span{display:block}.reconcile-result span{color:var(--muted-ink);margin-top:3px;font-size:13px}
+.campus-empty{padding:45px 20px;text-align:center;color:var(--muted-ink)}.campus-empty>.ico{width:44px;height:44px;display:block;margin:0 auto 10px;color:#547ba4}
+.campus-empty strong{display:block;color:var(--ink)}.campus-empty p{font-size:13px}
+.campus-entry{max-width:920px;padding-top:25px}.campus-entry h2{font-size:21px;margin:34px 0 5px}.campus-entry>p{color:var(--muted-ink)}
+.entry-choices{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0}
+.campus-choice{border:1px solid #c9d7e6;background:#f7faff;display:flex;align-items:center;text-align:left;min-width:232px;gap:12px;padding:14px 16px;color:var(--ink);border-radius:4px;cursor:pointer}
+.campus-choice:hover{border-color:#6587ae;background:#edf4fd}.campus-choice .choice-icon{display:flex;color:var(--link)}.campus-choice b{margin-left:auto;color:var(--link)}
+.campus-choice strong,.campus-choice small{display:block}.campus-choice strong{font-size:15px}.campus-choice small{color:var(--muted-ink);margin-top:2px}
+.solo-bar{display:flex;gap:14px;align-items:center;padding:9px 18px;background:var(--light);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.solo-bar a{color:var(--link);font-size:13px}
+.campus-page .page-title{margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.campus-page .page-title h1{font-size:21px;letter-spacing:0}.campus-page .page-title p,.campus-page .card-head p{font-size:13px}
+.campus-page .card,.campus-page .stat,.campus-page .tip,.campus-page .section-shell{border-radius:4px;box-shadow:none}
+.campus-page .card-head{padding:12px 15px;background:var(--light)}.campus-page .card-body{padding:13px 15px}
+.campus-page .card-head h2{font-size:16px}.campus-page .btn,.campus-module .drawer .btn{border-radius:3px}
+.campus-page .stats{gap:10px}.campus-page .stat-value{font-size:25px}
+@media(max-width:700px){
+  .portal-bar{gap:8px;padding:0 9px}.portal-brand{gap:5px}.portal-brand>span:nth-child(2){font-size:17px}.portal-brand b{display:none}.campus-seal{width:25px;height:25px}
+  .portal-tools{gap:8px}.portal-search{display:none}.portal-pane{margin:0 6px 6px}.work-tabs{padding:0 6px;height:37px}
+  .portal-crumb{gap:7px;min-height:32px;padding:4px 7px;overflow:hidden}.portal-crumb .where{display:none}
+  .portal-crumb #crumb-group,.portal-crumb #crumb-title{overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .portal-crumb #refresh-view,.portal-crumb #crumb-menu{flex-shrink:0}
+  .campus-module .business-body,.campus-entry{padding:10px 10px 24px}.business-title h1,.campus-entry h1{font-size:17px}
+  .credit-strip{padding:9px 0}.credit-strip>div{padding:0 7px}.credit-strip dt{font-size:12px}.credit-strip dd{font-size:22px}.credit-strip dd.metric-hint{font-size:11px}
+  .business-meta{gap:5px 10px}.business-filter{padding:7px;gap:7px}.business-filter input[type=search]{width:155px}
+  .business-table:not(.record-table){min-width:570px}.campus-module .business-table th,.campus-module .business-table td{padding:7px 8px}
+  .wide-credit-summary{display:none}.mobile-credit-summary{display:block;border:1px solid var(--line)}
+  .mobile-credit-labels,.mobile-credit-summary summary{display:grid;grid-template-columns:1.2fr 1fr 1fr;align-items:center;gap:6px;padding:8px 10px;font-size:13px}
+  .mobile-credit-labels{background:#eef3f9;color:#3e536e;font-size:12px;font-weight:600}
+  .mobile-credit-summary summary{cursor:pointer;list-style:none;min-height:40px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+  .mobile-credit-summary summary::-webkit-details-marker{display:none}.mobile-credit-summary summary span::before{content:"▸";color:var(--link);margin-right:5px}
+  .mobile-credit-summary details[open] summary span::before{content:"▾"}.mobile-credit-summary summary b{font-weight:500}
+  .mobile-credit-summary details>div{padding:4px 10px 10px 23px;font-size:12px;color:var(--muted-ink)}
+  .campus-module .business-table.record-table td{padding:5px 8px}.child-branch .business-table-wrap{margin-left:10px}
+  .entry-choices{display:grid}.campus-choice{min-width:0}.solo-bar{padding:6px 10px;gap:6px}.solo-bar strong{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.campus-host *,.campus-module *{scroll-behavior:auto}}

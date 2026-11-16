@@ -1,6 +1,6 @@
 """Authenticated student planning and counselor review endpoints."""
 from contextlib import contextmanager
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
@@ -12,8 +12,10 @@ User = Annotated[dict, Depends(core.current_user)]
 
 
 @contextmanager
-def operation(user, student_id, write=False, reviewer=False):
+def operation(user, student_id, write=False, reviewer=False, snapshot=False):
     with core.connection() as conn:
+        if snapshot and not write:
+            conn.execute("BEGIN")
         core.visible_student(conn, user, student_id)
         if write and not reviewer and user["role"] not in ("student", "admin"):
             raise HTTPException(403, "修读偏好与方案由学生本人填写，辅导员可查看和审核")
@@ -67,18 +69,55 @@ def get_plan(student_id: str, user: User, term: str | None = None):
         return planning.get_planning(conn, student_id, term)
 
 
+@router.get("/api/students/{student_id}/selection-risk")
+def next_term_risk(student_id: str, user: User):
+    from .selection_risk import next_term_report
+    with operation(user, student_id, snapshot=True) as conn:
+        return next_term_report(conn, student_id)
+
+
+class RiskChoice(BaseModel):
+    courseId: str = Field(min_length=1, max_length=120)
+
+
+class ComparisonRecord(RiskChoice):
+    fingerprint: str = Field(min_length=64, max_length=64)
+
+
+@router.post("/api/students/{student_id}/selection-risk/compare")
+def compare_next_term(student_id: str, body: RiskChoice, user: User):
+    from .selection_risk import compare_course
+    with operation(user, student_id, snapshot=True) as conn:
+        return compare_course(conn, student_id, body.courseId)
+
+
+@router.post("/api/students/{student_id}/selection-risk/record")
+def record_comparison(student_id: str, body: ComparisonRecord, user: User):
+    from .selection_risk import remember_comparison
+    with operation(user, student_id, write=True) as conn:
+        return remember_comparison(conn, student_id, body.courseId, body.fingerprint)
+
+
 class Check(BaseModel):
     term: str
     courseIds: list[str] = Field(max_length=60)
 
 
+class ComparisonRef(BaseModel):
+    id: str = Field(min_length=1, max_length=80)
+    choice: Literal["with", "without"]
+
+
 class Save(Check):
     title: str = Field(default="", max_length=120)
     note: str = Field(default="", max_length=2000)
+    comparison: ComparisonRef | None = None
+    expectedVersion: int | None = Field(default=None, ge=0)
 
 
 class Submit(BaseModel):
     term: str
+    expectedVersion: int | None = Field(default=None, ge=0)
 
 
 class Review(Submit):
@@ -95,19 +134,20 @@ def check(student_id: str, body: Check, user: User):
 @router.put("/api/students/{student_id}/planning")
 def save(student_id: str, body: Save, user: User):
     with operation(user, student_id, write=True) as conn:
-        return planning.save_plan(conn, student_id, body.term, body.courseIds, body.title.strip(), body.note.strip(), user["id"])
+        return planning.save_plan(conn, student_id, body.term, body.courseIds, body.title.strip(), body.note.strip(), user["id"],
+                                  body.comparison.model_dump() if body.comparison else None, body.expectedVersion)
 
 
 @router.post("/api/students/{student_id}/planning/submit")
 def submit(student_id: str, body: Submit, user: User):
     with operation(user, student_id, write=True) as conn:
-        return planning.submit_plan(conn, student_id, body.term, user["id"])
+        return planning.submit_plan(conn, student_id, body.term, user["id"], body.expectedVersion)
 
 
 @router.post("/api/students/{student_id}/planning/review")
 def review(student_id: str, body: Review, user: User):
     with operation(user, student_id, write=True, reviewer=True) as conn:
-        return planning.review_plan(conn, student_id, body.term, body.status, body.comment, user["id"])
+        return planning.review_plan(conn, student_id, body.term, body.status, body.comment, user["id"], body.expectedVersion)
 
 
 @router.get("/api/counselor/plans")

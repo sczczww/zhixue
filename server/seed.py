@@ -32,7 +32,7 @@ def ensure_demo(count=144):
                     ('SIM-SOC','社会观察',4,'通识',{'generalModule':'社会'}),
                     ('SIM-CROSS','跨学科项目',3,'个性化',{}),
                 ]:
-                    catalog.append({'id':mid+':'+code,'code':code,'name':title+'（模拟）','credits':2,'semester':sem,'module':category,'submodule':'核心通识' if category=='通识' else '自选模块','required':False,'isSimulated':True,'source':'演示课程，并非培养方案原文',**flags})
+                    catalog.append({'id':mid+':'+code,'code':code,'name':title+'（模拟）','credits':2,'semester':sem,'module':category,'submodule':'核心通识' if category=='通识' else '自选模块','required':False,'courseNature':'任选','isSimulated':True,'source':'演示课程，并非培养方案原文',**flags})
                 course_lists[mid]=catalog
                 for c in catalog:
                     db.execute('INSERT INTO courses VALUES (?,?,?,?,?,?,?,?,?)',(c['id'],c['code'],c['name'],mid,c['credits'],c['module'],c['semester'],int(c['required']),json.dumps(c,ensure_ascii=False)))

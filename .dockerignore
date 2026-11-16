@@ -1,0 +1,16 @@
+**
+!Dockerfile
+!requirements-lock.txt
+!server/
+!server/*.py
+!web/
+!web/**
+!data/
+!data/curriculum.json
+!data/b1-requirements.json
+!data/sources/
+!data/sources/*人才培养方案.pdf
+**/__pycache__/
+**/*.pyc
+**/.env
+**/.env.*

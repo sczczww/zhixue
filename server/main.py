@@ -3,7 +3,6 @@ import hashlib
 import hmac
 import json
 import logging
-import secrets
 import time
 from contextlib import asynccontextmanager
 from urllib.parse import urlsplit
@@ -11,17 +10,26 @@ from fastapi import FastAPI,Depends,HTTPException,Request,Response
 from fastapi.responses import FileResponse,JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel,Field
-from .core import ROOT,TERM,initialize,connection,is_demo,current_user,hash_password,require_admin,audit
+from .core import ROOT,TERM,initialize,connection,is_demo,is_public_demo,current_user,hash_password,require_admin,issue_session
+from . import campus
 
 @asynccontextmanager
 async def lifespan(app):
+    if is_public_demo() and not is_demo():
+        raise ValueError('共享体验需要启用模拟数据模式')
+    campus.allowed_parents()
     initialize()
+    with connection() as db:
+        campus.install_ticket_schema(db)
     if is_demo():
         from .seed import ensure_demo
         ensure_demo()
         from .planning import seed_demo_support
         with connection() as db:
             seed_demo_support(db)
+    from .academic import refresh_gpa_policy
+    with connection() as db:
+        refresh_gpa_policy(db)
     yield
 
 app=FastAPI(title='知学 · 学业支持智能体',version='2.1.0',lifespan=lifespan)
@@ -34,7 +42,7 @@ async def security(request,call_next):
             return JSONResponse({'detail':'跨站写入请求已拒绝'},status_code=403)
     response=await call_next(request)
     response.headers['X-Content-Type-Options']='nosniff'
-    response.headers['X-Frame-Options']='DENY'
+    response.headers.update(campus.frame_headers(request.url.path))
     response.headers['Referrer-Policy']='same-origin'
     if request.url.path.startswith('/api/'):
         response.headers['Cache-Control']='no-store'
@@ -69,11 +77,7 @@ def login(body:Login,request:Request,response:Response):
             login_failures[host]=entries+[time.time()]
             raise HTTPException(401,'账号或密码不正确')
         login_failures.pop(host,None)
-        token=secrets.token_urlsafe(40)
-        db.execute('DELETE FROM sessions WHERE expires<?',(time.time(),))
-        db.execute('INSERT INTO sessions VALUES (?,?,?)',(hashlib.sha256(token.encode()).hexdigest(),row['id'],time.time()+28800))
-        audit(db,row['id'],'登录',{'role':row['role']})
-    response.set_cookie('zhixue',token,max_age=28800,httponly=True,samesite='strict',secure=request.url.scheme=='https')
+        issue_session(db,request,response,row)
     return {'user':{'id':row['id'],'name':row['name'],'role':row['role']},'demo':is_demo()}
 
 @app.get('/api/session')
@@ -90,7 +94,7 @@ def accounts():
     if not is_demo(): raise HTTPException(404)
     with connection() as db:
         rows=db.execute("SELECT id,name,role FROM users WHERE role!='student' OR id IN (SELECT id FROM students ORDER BY id LIMIT 1) OR id IN (SELECT DISTINCT student_id FROM alerts ORDER BY student_id LIMIT 3) ORDER BY CASE role WHEN 'counselor' THEN 0 WHEN 'student' THEN 1 ELSE 2 END,id").fetchall()
-    return {'accounts':[dict(r) for r in rows],'password':'demo123'}
+    return {'accounts':[dict(r) for r in rows if not is_public_demo() or r['role']!='admin'],'password':'demo123'}
 
 @app.get('/api/status')
 def status():
@@ -98,7 +102,7 @@ def status():
     with connection() as db:
         n=db.execute('SELECT COUNT(*) FROM students').fetchone()[0]
     cfg=ai_public()
-    return {'service':'zhixue','version':'2.1.0','term':TERM,'students':n,'demo':is_demo(),'ai':{'mode':cfg['mode'],'configured':cfg['hasKey'],'model':cfg['model']}}
+    return {'service':'zhixue','version':'2.1.0','term':TERM,'students':n,'demo':is_demo(),'publicDemo':is_public_demo(),'ai':{'mode':cfg['mode'],'configured':cfg['hasKey'],'model':cfg['model']}}
 
 @app.get('/api/curriculum')
 def curriculum_api(user=Depends(current_user)):
@@ -128,3 +132,4 @@ app.include_router(assistant_router)
 app.include_router(imports_router)
 app.include_router(student_actions_router)
 app.include_router(planning_router)
+app.include_router(campus.router)

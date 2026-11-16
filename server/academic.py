@@ -10,7 +10,8 @@ import math
 import uuid
 from collections import defaultdict
 
-from . import core, planning, data_quality
+from . import core, planning, data_quality, grading
+from .grading import grade_point
 
 
 LEVEL_NAMES = {1: "轻度预警", 2: "一般预警", 3: "危急预警"}
@@ -30,11 +31,6 @@ RULES = [
 
 def catalog():
     return json.loads((core.ROOT / "data" / "curriculum.json").read_text(encoding="utf-8"))
-
-
-def grade_point(score):
-    """Continuous 0–4 demonstration GPA; official transcript conversion may differ."""
-    return 0.0 if score < 60 else min(4.0, 1.0 + (score - 60) * 3.0 / 40.0)
 
 
 def semester_of(cohort):
@@ -107,6 +103,8 @@ def _analyze(conn, student):
     curriculum_audit = planning.audit_curriculum(conn, student["id"])
     checks = curriculum_audit["checks"]
 
+    scopes = {cid: grading.gpa_scope(course, preference["language"]) for cid, course in offerings.items()}
+    unknown_nature = {cid for cid in recognized if scopes.get(cid, "unconfirmed") == "unconfirmed"}
     term_records = defaultdict(dict)
     for record in assessments:
         term_records[record["term"]][record["course_id"]] = record
@@ -117,11 +115,12 @@ def _analyze(conn, student):
         weight = sum(offerings[r["course_id"]]["credits"] for r in rows)
         if weight:
             mean = sum(float(r["score"]) * offerings[r["course_id"]]["credits"] for r in rows) / weight
-            gpa = sum(grade_point(float(r["score"])) * offerings[r["course_id"]]["credits"] for r in rows) / weight
-            precise_trend.append({"term": term, "gpa": gpa, "score": mean})
-            trend.append({"term": term, "gpa": round(gpa, 2), "score": round(mean, 1)})
-    graded_weight = sum(offerings[cid]["credits"] for cid in latest if cid in offerings)
-    cumulative_gpa = (sum(grade_point(float(r["score"])) * offerings[cid]["credits"] for cid, r in recognized.items() if cid in offerings) / graded_weight) if graded_weight else None
+            gpa = grading.weighted_gpa(rows, offerings, scopes)
+            pending_nature = len(unknown_nature.intersection(term_records[term]))
+            precise_trend.append({"term": term, "gpa": gpa, "score": mean, "pendingNature":pending_nature})
+            trend.append({"term": term, "gpa": round(gpa, 2) if gpa is not None else None,
+                          "score": round(mean, 1), "pendingNature":pending_nature})
+    cumulative_gpa = grading.weighted_gpa(recognized.values(), offerings, scopes)
     selected_credits = sum(offerings[cid]["credits"] for cid in selected if cid in offerings)
     mandatory = [c for c in offerings.values() if planning.applicable_required(c, preference, program)]
     due_before = [c for c in mandatory if 0 < c["semester"] < semester]
@@ -150,7 +149,12 @@ def _analyze(conn, student):
         value = precise_trend[-1]["score"]
         signal("performance", 3 if value < 60 else 2, "近期成绩需要关注", "最近学期加权均分", value,
                "低于60分危急预警；60至不足70分一般预警", f"成绩记录 · {trend[-1]['term']}", "先核实成绩完整性，再为薄弱课程安排答疑与学习计划。")
-    if graded_term_complete and len(precise_trend) >= 3 and precise_trend[-3]["gpa"] > precise_trend[-2]["gpa"] > precise_trend[-1]["gpa"] and precise_trend[-3]["gpa"] - precise_trend[-1]["gpa"] >= .6 - 1e-10:
+    last_three = precise_trend[-3:]
+    last_gpas = [t["gpa"] if not t["pendingNature"] else None for t in last_three]
+    graded_terms = sorted(term_records)
+    comparable_three = (len(last_gpas) == 3 and None not in last_gpas
+                        and [t["term"] for t in last_three] == graded_terms[-3:])
+    if graded_term_complete and comparable_three and last_gpas[0] > last_gpas[1] > last_gpas[2] and last_gpas[0] - last_gpas[2] >= .6 - 1e-10:
         signal("performance", 1, "学习表现连续回落", "三个学期绩点变化", [x["gpa"] for x in precise_trend[-3:]],
                "连续下降且首末差至少0.6", "最近三个有成绩的学期", "和学生一起回顾课程负担与学习方法，约定两周后复查。")
     if pending_failures:
@@ -184,7 +188,9 @@ def _analyze(conn, student):
         portraits.append("课程补修")
     if history_complete and due_credits and due_gap / due_credits >= .15:
         portraits.append("学分待追赶")
-    if graded_term_complete and len(trend) >= 2 and trend[-1]["gpa"] < trend[-2]["gpa"] - .3:
+    if (graded_term_complete and len(last_gpas) >= 2 and None not in last_gpas[-2:]
+            and [t["term"] for t in last_three[-2:]] == graded_terms[-2:]
+            and last_gpas[-2] - last_gpas[-1] > .3 + 1e-10):
         portraits.append("成绩回落")
     portrait = " · ".join(portraits[:2]) or ("历史数据待确认" if not history_complete else "学习稳步推进" if assessments else "等待成绩完善")
     counselor = conn.execute("SELECT name FROM users WHERE id=?", (student["counselor_id"],)).fetchone()
@@ -200,6 +206,8 @@ def _analyze(conn, student):
                         "score": record["score"] if record else None, "state": state, "required": planning.applicable_required(c, preference, program), "sourcePage": c["meta"].get("sourcePage")})
     suggestions = list(dict.fromkeys(a for item in signals.values() for a in item["suggestions"])) or ["保持当前学习节奏，选课前核对培养方案和课程开设学期。"]
     data_notes = []
+    if unknown_nature:
+        data_notes.append(f"有{len(unknown_nature)}门已出分课程的绩点统计范围待核对，平均绩点暂按已确认计入的课程计算。")
     if not history_complete:
         data_notes.append("历史成绩尚未声明完整覆盖；即使已有部分成绩，也不能把缺记录当作漏修或真实学分缺口。已获学分为当前记录合计，模块缺口和后续负荷仅作待核对估算。")
         suggestions.insert(0, "先导入并核对历史成绩，再判断往期课程完成情况。")
@@ -212,8 +220,9 @@ def _analyze(conn, student):
             "creditProgress": round(credited / total * 100, 1) if total else 0, "plannedCredits": round(due_credits, 2), "creditGap": round(due_gap, 2) if history_complete else None,
             "loadLimit": round(load_limit, 2), "latestScore": trend[-1]["score"] if trend else None, "latestGradedTerm": trend[-1]["term"] if trend else None,
             "currentGradesPending": not any(r["term"] == core.TERM for r in assessments),
-            "dataQuality": {"hasAssessments": bool(assessments), "hasHistoricalRecords": historical_records, "hasHistoricalGrades": historical_grades, "hasCurrentEnrollment": have_selection_data, "historyNeedsVerification": not history_complete, "latestGradedTermComplete": graded_term_complete, **declared_coverage},
-            "dataNotes": data_notes, "gpaMethod": "演示连续绩点：60分为1.0，100分为4.0；真实接入时使用教务换算规则。"},
+            "dataQuality": {"hasAssessments": bool(assessments), "hasHistoricalRecords": historical_records, "hasHistoricalGrades": historical_grades, "hasCurrentEnrollment": have_selection_data, "historyNeedsVerification": not history_complete, "latestGradedTermComplete": graded_term_complete, "gpaTrendComparable":comparable_three, **declared_coverage},
+            "dataNotes": data_notes, "gpaMethod": grading.METHOD, "gpaSource":grading.SOURCE_URL,
+            "gpaPendingCourses":len(unknown_nature)},
             "trend": trend, "credits": {"earned": round(earned, 2), "credited": round(credited, 2), "total": total, "remaining": round(remaining, 2), "categories": categories, "checks": checks, "semester": semester, "preferences": preference, "moduleAudits": curriculum_audit["moduleAudits"], "pathAudit": curriculum_audit["pathAudit"]},
             "courses": courses, "alerts": alerts, "suggestions": suggestions,
             "junior": {"enabled": semester >= 5, "remainingTerms": remaining_terms, "creditsPerTerm": round(per_term, 1) if history_complete else None, "estimatedCreditsPerTerm": round(per_term, 1), "missingCourses": [c["name"] for c in missing],
@@ -230,16 +239,20 @@ def profile(conn, student_id):
     return result
 
 
-def _reconcile(conn):
+def _reconcile(conn, only_kind=None):
     """Reconcile current academic signals; always preserve human follow-up history."""
     count = created = updated = 0
     students = conn.execute("SELECT * FROM students ORDER BY id").fetchall()
     for student in students:
         count += 1
-        planning.sync_plan_owner(conn, student["id"])
+        if only_kind is None:
+            planning.sync_plan_owner(conn, student["id"])
         analysis = _analyze(conn, student)
         signals = analysis["_signals"]
         old = {row["kind"]: dict(row) for row in conn.execute("SELECT * FROM alerts WHERE student_id=? AND term=?", (student["id"], core.TERM))}
+        if only_kind is not None:
+            signals = {k:v for k,v in signals.items() if k == only_kind}
+            old = {k:v for k,v in old.items() if k == only_kind}
         for kind, facts in signals.items():
             timestamp = core.now()
             evidence = json.dumps(facts["evidence"], ensure_ascii=False)
@@ -277,6 +290,8 @@ def _reconcile(conn):
             if kind not in signals and previous["active"]:
                 quality = analysis["metrics"]["dataQuality"]
                 confirmed_input = quality["enrollmentComplete"] and quality["historyComplete"] if kind == "selection" else quality["historyComplete"] if kind == "progress" else quality["latestGradedTermComplete"] if kind == "performance" else quality["hasAssessments"]
+                if kind == "performance" and any(e.get("label") == "三个学期绩点变化" for e in _decode(previous["evidence"], [])):
+                    confirmed_input = confirmed_input and quality["gpaTrendComparable"]
                 if not confirmed_input:
                     conn.execute("UPDATE alerts SET active=0,updated_at=? WHERE id=?", (core.now(), previous["id"]))
                     conn.execute("INSERT INTO case_events(alert_id,actor_id,action,note,plan,review_on,created_at) VALUES (?,?,?,?,?,?,?)", (previous["id"], "system", "coverage_unconfirmed", "数据完整覆盖尚未确认，暂停此项推断；这不代表风险已经恢复，原帮扶记录保留。", "", "", core.now()))
@@ -300,10 +315,31 @@ def recompute(conn):
         conn.execute("BEGIN IMMEDIATE")
     try:
         result = _reconcile(conn)
+        _mark_gpa_policy(conn)
         if owns_transaction:
             conn.execute("COMMIT")
         return result
     except Exception:
         if owns_transaction:
             conn.execute("ROLLBACK")
+        raise
+
+
+def _mark_gpa_policy(conn):
+    conn.execute("INSERT OR REPLACE INTO settings(key,value) VALUES('gpa_policy',?)",
+                 (grading.POLICY_ID + "@" + core.TERM,))
+
+
+def refresh_gpa_policy(conn):
+    """Refresh persisted GPA-related signals once per rule/term without replacing case histories."""
+    conn.execute("BEGIN IMMEDIATE")
+    try:
+        previous = conn.execute("SELECT value FROM settings WHERE key='gpa_policy'").fetchone()
+        if not previous or previous["value"] != grading.POLICY_ID + "@" + core.TERM:
+            if conn.execute("SELECT 1 FROM students LIMIT 1").fetchone():
+                _reconcile(conn, only_kind="performance")
+            _mark_gpa_policy(conn)
+        conn.commit()
+    except Exception:
+        conn.rollback()
         raise

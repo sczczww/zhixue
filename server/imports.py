@@ -8,6 +8,7 @@ import secrets
 from fastapi import APIRouter,Depends,HTTPException,UploadFile,File
 from fastapi.responses import Response
 from .core import connection,current_user,require_admin,audit,TERM,add_user,is_demo
+from .grading import COURSE_NATURES
 
 router=APIRouter()
 FIELDS={
@@ -99,8 +100,10 @@ def import_one(db,kind,row,actor='admin-import'):
             try:extra=json.loads(row['metadata'])
             except (TypeError,ValueError):raise ValueError('metadata须为JSON对象')
             if not isinstance(extra,dict):raise ValueError('metadata须为JSON对象')
-            allowed={'language','submodule','generalModule','art','innovation','crossModule','crossModuleRequiredCredits','crossModuleVerified','freeModule','freeModuleRequiredCredits','freeModuleVerified','recognitionSource'}
+            allowed={'language','submodule','generalModule','art','innovation','crossModule','crossModuleRequiredCredits','crossModuleVerified','freeModule','freeModuleRequiredCredits','freeModuleVerified','recognitionSource','courseNature'}
             if set(extra)-allowed:raise ValueError('metadata包含不支持的字段')
+            if 'courseNature' in extra and (not isinstance(extra['courseNature'],str) or extra['courseNature'] not in COURSE_NATURES):
+                raise ValueError('courseNature 须为必修、限选或任选')
             for key in ('art','innovation','crossModuleVerified','freeModuleVerified'):
                 if key in extra and not isinstance(extra[key],bool):raise ValueError(key+'须为布尔值')
             for key in ('crossModuleRequiredCredits','freeModuleRequiredCredits'):

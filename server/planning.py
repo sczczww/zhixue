@@ -35,6 +35,11 @@ def initialize(conn):
         conn.execute("ALTER TABLE course_plans ADD COLUMN submitted_owner_id TEXT")
     if "preference_snapshot" not in {r["name"] for r in conn.execute("PRAGMA table_info(course_plans)")}:
         conn.execute("ALTER TABLE course_plans ADD COLUMN preference_snapshot TEXT NOT NULL DEFAULT '{}'")
+    if "comparison_snapshot" not in {r["name"] for r in conn.execute("PRAGMA table_info(course_plans)")}:
+        conn.execute("ALTER TABLE course_plans ADD COLUMN comparison_snapshot TEXT NOT NULL DEFAULT '{}'")
+    conn.execute("""CREATE TABLE IF NOT EXISTS selection_comparisons(
+        id TEXT PRIMARY KEY, student_id TEXT NOT NULL REFERENCES students(id),
+        term TEXT NOT NULL, payload TEXT NOT NULL, created_at TEXT NOT NULL)""")
 
 
 def _json(text, fallback):
@@ -111,6 +116,13 @@ def category_totals(program, courses, counted):
 def _passed(conn, student_id, cutoff=core.TERM, strictly_before=False):
     operator = "<" if strictly_before else "<="
     return {r[0] for r in conn.execute(f"SELECT DISTINCT course_id FROM records WHERE student_id=? AND term {operator} ? AND term<=? AND score>=60 AND state!='withdrawn'", (student_id, cutoff, core.TERM))}
+
+
+def current_ungraded(conn, student_id):
+    """Courses still being taken. A previous pass already earns their credit once."""
+    rows = conn.execute("SELECT course_id FROM records WHERE student_id=? AND term=? AND state='enrolled' AND score IS NULL",
+                        (student_id, core.TERM))
+    return {row[0] for row in rows} - _passed(conn, student_id)
 
 
 def _module_options(course, program):
@@ -356,6 +368,7 @@ def check_plan(conn, student_id, term, course_ids):
     chosen = []
     excluded = False
     semester = semester_for(student["cohort"], term)
+    awaiting = current_ungraded(conn, student_id) if term > core.TERM else set()
     for cid in dict.fromkeys(course_ids):
         course = offers.get(cid)
         if not course or not course["available"]:
@@ -383,6 +396,8 @@ def check_plan(conn, student_id, term, course_ids):
                 add("prerequisite", "error", f"{course['name']} 的先修课程 {p['name']} 尚无通过记录", [cid, p["courseId"]], p["source"])
         if course["passed"]:
             add("already_passed", "warning", f"{course['name']} 已通过，再次修读不会重复增加学分", [cid], "已通过成绩记录")
+        if cid in awaiting:
+            add("awaiting_result", "warning", f"{course['name']} 本学期正在修读，请在出分后确认是否还需要安排。", [cid], "本学期在读记录")
         if course["semester"] > semester:
             add("early", "warning", f"{course['name']} 建议第{course['semester']}学期修读，当前为第{semester}学期", [cid], "培养方案建议学期，不是强制开课限制")
         if not course["slots"]:
@@ -398,8 +413,11 @@ def check_plan(conn, student_id, term, course_ids):
     program = _program(student["major"])
     passed = _passed(conn, student_id)
     quality = data_quality.coverage(conn, student_id)
-    missing_required = [{"id": c["id"], "name": c["name"], "credits": c["credits"], "available": c["id"] in offers and offers[c["id"]]["available"]} for c in own_catalog.values() if applicable_required(c, pref, program) and 0 < c["semester"] <= semester and c["id"] not in passed and c["id"] not in course_ids]
-    if not quality["historyComplete"]:
+    due = [c for c in own_catalog.values() if applicable_required(c, pref, program) and 0 < c["semester"] <= semester and c["id"] not in passed]
+    awaiting_required = [{"id":c["id"],"name":c["name"],"credits":c["credits"]} for c in due if c["id"] in awaiting]
+    missing_required = [{"id": c["id"], "name": c["name"], "credits": c["credits"], "available": c["id"] in offers and offers[c["id"]]["available"]} for c in due if c["id"] not in awaiting and c["id"] not in course_ids]
+    can_assess_omissions = quality["historyComplete"] and (term <= core.TERM or quality["enrollmentComplete"])
+    if not can_assess_omissions:
         missing_required = []
     if missing_required:
         add("incomplete_plan", "warning", f"还有{len(missing_required)}门到建议学期的必修/限选课未纳入本方案，请与辅导员核对", [c["id"] for c in missing_required], "培养方案与本方案比较；缺少完整历史成绩时仅作为待核对提示")
@@ -407,9 +425,13 @@ def check_plan(conn, student_id, term, course_ids):
     notes = ["可提交只表示所选组合没有已知阻断，不等于完整学期方案或毕业资格。", "本检查基于当前记录；模拟先修、课表与容量已注明来源。", "保存或获批只代表学业规划意见，不会写入学校教务选课。"]
     if not quality["historyComplete"]:
         notes.insert(0, "历史成绩覆盖未确认，无法判断整份方案是否补齐所有必修；当前只检查所选组合的已知约束。")
+    elif term > core.TERM and not quality["enrollmentComplete"]:
+        notes.insert(0, "本学期选课覆盖待确认，需先核对在读记录，再判断下一学期还要安排的必修课程。")
     if excluded:
         notes.insert(0, "未确认开课、路线不符或目录中不存在的项未纳入合计；合计为0不表示该课程本身为0学分。")
-    return {"totalCredits": round(total, 2), "conflicts": conflicts, "courses": chosen, "eligible": eligible, "complete": eligible and bool(course_ids) and quality["historyComplete"] and not missing_required, "missingRequired": missing_required, "dataQuality": quality, "notes": notes}
+    if awaiting_required:
+        notes.append(f"有{len(awaiting_required)}门本学期在读必修或限选课程，出分后再核对后续安排。")
+    return {"totalCredits": round(total, 2), "conflicts": conflicts, "courses": chosen, "eligible": eligible, "complete": eligible and bool(course_ids) and can_assess_omissions and not missing_required and not awaiting_required, "missingRequired": missing_required, "awaitingRequired":awaiting_required, "dataQuality": quality, "notes": notes}
 
 
 def plan_object(conn, row):
@@ -419,7 +441,7 @@ def plan_object(conn, row):
     reviewer = conn.execute("SELECT name FROM users WHERE id=?", (row["reviewer_id"],)).fetchone() if row["reviewer_id"] else None
     ids = _json(row["course_ids"], [])
     events = [{"action": e["action"], "actor": e["actor_name"] or e["actor_id"], "payload": _json(e["payload"], {}), "createdAt": e["created_at"]} for e in conn.execute("SELECT e.*,u.name AS actor_name FROM plan_events e LEFT JOIN users u ON u.id=e.actor_id WHERE e.plan_id=? ORDER BY e.id", (row["id"],))]
-    return {"id": row["id"], "studentId": row["student_id"], "term": row["term"], "title": row["title"], "note": row["note"], "courseIds": ids, "status": row["status"], "reviewComment": row["review_comment"], "reviewerName": reviewer["name"] if reviewer else None, "submittedAt": row["submitted_at"], "reviewedAt": row["reviewed_at"], "updatedAt": row["updated_at"], "version": row["version"], "preferences": _json(row.get("preference_snapshot"), {}), "check": check_plan(conn, row["student_id"], row["term"], ids), "events": events}
+    return {"id": row["id"], "studentId": row["student_id"], "term": row["term"], "title": row["title"], "note": row["note"], "courseIds": ids, "status": row["status"], "reviewComment": row["review_comment"], "reviewerName": reviewer["name"] if reviewer else None, "submittedAt": row["submitted_at"], "reviewedAt": row["reviewed_at"], "updatedAt": row["updated_at"], "version": row["version"], "preferences": _json(row.get("preference_snapshot"), {}), "comparison": _json(row.get("comparison_snapshot"), {}), "check": check_plan(conn, row["student_id"], row["term"], ids), "events": events}
 
 
 def get_planning(conn, student_id, term=None):
@@ -428,7 +450,8 @@ def get_planning(conn, student_id, term=None):
     pref = preferences(conn, student_id)
     offerings = _offerings(conn, student, term)
     semester = semester_for(student["cohort"], term)
-    candidates = [o for o in offerings if o["available"] and not o["passed"] and o["semester"] <= semester]
+    awaiting = current_ungraded(conn, student_id) if term > core.TERM else set()
+    candidates = [o for o in offerings if o["available"] and not o["passed"] and o["courseId"] not in awaiting and o["semester"] <= semester]
     candidates.sort(key=lambda o: (not (o["required"] and o["semester"] <= semester), o["moduleId"] not in pref["advancedModules"], not o["selected"], o["semester"], o["code"]))
     target = max(24, sum(o["credits"] for o in candidates if o["required"] and o["semester"] == semester))
     selected = []
@@ -456,23 +479,43 @@ def _event(conn, plan_id, actor, action, payload):
     core.audit(conn, actor, "planning." + action, {"planId": plan_id, **payload})
 
 
-def save_plan(conn, student_id, term, course_ids, title, note, actor):
+def save_plan(conn, student_id, term, course_ids, title, note, actor, comparison=None, expected_version=None):
     check_plan(conn, student_id, term, course_ids)
     old = conn.execute("SELECT * FROM course_plans WHERE student_id=? AND term=?", (student_id, term)).fetchone()
+    check_version(old, expected_version)
     if old and old["status"] == "submitted":
         raise ValueError("方案已提交，请等待审核意见后再修改")
+    evidence = _json(old["comparison_snapshot"], {}) if old else {}
+    if comparison and (evidence.get("id"), evidence.get("choice")) != (comparison["id"], comparison["choice"]):
+        record = conn.execute("SELECT * FROM selection_comparisons WHERE id=? AND student_id=? AND term=?",
+                              (comparison["id"], student_id, term)).fetchone()
+        if not record:
+            raise ValueError("选课比较记录与当前学生或学期不匹配，请重新比较")
+        evidence = _json(record["payload"], {})
+        if evidence["baseVersion"] != (old["version"] if old else 0):
+            raise ValueError("方案已更新，请重新比较后再采纳")
+        if comparison["choice"] not in ("with", "without") or not evidence[comparison["choice"]]["eligible"]:
+            raise ValueError("请先解决比较方案中的阻断问题")
+        evidence = {**evidence, "id":record["id"], "comparedAt":record["created_at"], "choice":comparison["choice"]}
     plan_id = old["id"] if old else "PLAN-" + uuid.uuid4().hex[:12].upper()
     conn.execute("INSERT INTO course_plans(id,student_id,term,title,note,course_ids,updated_at) VALUES (?,?,?,?,?,?,?) ON CONFLICT(student_id,term) DO UPDATE SET title=excluded.title,note=excluded.note,course_ids=excluded.course_ids,status='draft',review_comment='',reviewer_id=NULL,submitted_at=NULL,reviewed_at=NULL,submitted_owner_id=NULL,updated_at=excluded.updated_at,version=course_plans.version+1", (plan_id, student_id, term, title or term + "学期规划", note or "", json.dumps(course_ids), core.now()))
     snapshot = preferences(conn, student_id)
     conn.execute("UPDATE course_plans SET preference_snapshot=? WHERE id=?", (json.dumps(snapshot, ensure_ascii=False), plan_id))
-    _event(conn, plan_id, actor, "saved", {"courseIds": course_ids, "title": title, "note": note, "preferences": snapshot})
+    conn.execute("UPDATE course_plans SET comparison_snapshot=? WHERE id=?", (json.dumps(evidence, ensure_ascii=False), plan_id))
+    _event(conn, plan_id, actor, "saved", {"courseIds": course_ids, "title": title, "note": note, "preferences": snapshot, "comparison": evidence})
     return plan_object(conn, conn.execute("SELECT * FROM course_plans WHERE id=?", (plan_id,)).fetchone())
 
 
-def submit_plan(conn, student_id, term, actor):
+def check_version(row, expected):
+    if expected is not None and expected != (row["version"] if row else 0):
+        raise ValueError("方案已在其他页面更新，请重新载入后核对再操作")
+
+
+def submit_plan(conn, student_id, term, actor, expected_version=None):
     row = conn.execute("SELECT * FROM course_plans WHERE student_id=? AND term=?", (student_id, validate_term(term))).fetchone()
     if not row:
         raise ValueError("请先保存选课规划")
+    check_version(row, expected_version)
     if row["status"] == "submitted":
         return plan_object(conn, row)
     if row["status"] == "approved":
@@ -485,7 +528,8 @@ def submit_plan(conn, student_id, term, actor):
     conn.execute("UPDATE course_plans SET status='submitted',submitted_at=?,updated_at=?,submitted_owner_id=? WHERE id=?", (core.now(), core.now(), student["counselor_id"], row["id"]))
     snapshot = preferences(conn, student_id)
     conn.execute("UPDATE course_plans SET preference_snapshot=? WHERE id=?", (json.dumps(snapshot, ensure_ascii=False), row["id"]))
-    _event(conn, row["id"], actor, "submitted", {"courseIds": ids, "preferences": snapshot})
+    _event(conn, row["id"], actor, "submitted", {"courseIds": ids, "preferences": snapshot,
+           "comparison":_json(row["comparison_snapshot"], {})})
     if hasattr(core, "notify"):
         core.notify(conn, student["counselor_id"], student["name"] + "提交了学期选课规划", "semester_plan", row["id"], student_id)
     return plan_object(conn, conn.execute("SELECT * FROM course_plans WHERE id=?", (row["id"],)).fetchone())
@@ -501,10 +545,11 @@ def sync_plan_owner(conn, student_id):
             core.notify(conn, student["counselor_id"], student["name"] + "的待审选课方案已转交给您", "semester_plan", row["id"], student_id)
 
 
-def review_plan(conn, student_id, term, status, comment, actor):
+def review_plan(conn, student_id, term, status, comment, actor, expected_version=None):
     row = conn.execute("SELECT * FROM course_plans WHERE student_id=? AND term=?", (student_id, validate_term(term))).fetchone()
     if not row or row["status"] != "submitted":
         raise ValueError("仅能审核已提交的方案")
+    check_version(row, expected_version)
     if status not in ("approved", "revision") or len(comment.strip()) < 2:
         raise ValueError("请选择通过或修改，并填写具体审核意见")
     if status == "approved" and not check_plan(conn, student_id, term, _json(row["course_ids"], []))["eligible"]:
