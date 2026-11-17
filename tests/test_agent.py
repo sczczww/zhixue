@@ -472,6 +472,110 @@ class AgentAcceptance(unittest.TestCase):
         for claim in rejected:
             with self.subTest(claim=claim): self.assertIsNotNone(academic_claim_error(claim, session))
 
+    def _scope_guard_session(self):
+        from server.agent_runtime import ToolSession
+        session = ToolSession({"id": "admin", "role": "admin"}, "test", self.se)
+        profile = {
+            "student": {"id": self.se, "name": "乙同学", "majorName": "软件工程", "gpa": 3.0},
+            "credits": {"earned": 80, "total": 170, "remaining": 90, "categories": [
+                {"name": "通识", "earned": 48, "required": 82, "remaining": 34, "subcategories": [
+                    {"name": "通修通识", "earned": 40, "required": 60, "remaining": 20},
+                    {"name": "核心通识", "earned": 8, "required": 22, "remaining": 14}]},
+                {"name": "专业", "earned": 30, "required": 64, "remaining": 34, "subcategories": [
+                    {"name": "专业核心", "earned": 30, "required": 64, "remaining": 34}]},
+                {"name": "个性化", "earned": 2, "required": 24, "remaining": 22, "subcategories": []}]},
+            "metrics": {"failedCourses": 5, "currentGradesPending": False, "dataQuality": {"hasAssessments": True}},
+            "rule": "未通过课程1门为轻度，2至4门为一般，5门及以上为重点。"}
+        session.results = [{"tool": "student_brief", "data": profile, "sourceIds": ["S1"]}]
+        session.citations = [{"id": "S1", "title": "乙同学的当前记录及项目规则"}]
+        return session
+
+    def test_guard_scope_binds_overall_and_named_credit_fields(self):
+        from server.agent_runtime import guarded_answer
+        session = self._scope_guard_session()
+        accepted = (
+            "已获学分80，毕业总学分要求170，还需90学分。[S1]",
+            "专业核心还差34学分，个性化还差22学分。[S1]",
+            "专业核心已获30学分，还需34学分。[S1]",
+            "专业核心已获30学分，总体还需90学分。[S1]",
+            "专业核心已获30学分，你目前已获80学分。[S1]",
+            "通修通识还差20学分，核心通识还差14学分。[S1]",
+            "个性化总学分要求24。[S1]",
+            "软件工程专业总学分要求170。[S1]",
+            "已修不是30学分，实际已修80学分。[S1]",
+            "专业核心已修不是80学分，还差不是22学分。[S1]")
+        rejected = (
+            "毕业总学分要求64。[S1]",
+            "已获学分30，还需34学分。[S1]",
+            "专业核心还差22学分，个性化还差34学分。[S1]",
+            "通修通识已获8学分，核心通识已获40学分。[S1]",
+            "专业核心已获30学分，毕业总学分要求64。[S1]",
+            "个性化总学分要求170。[S1]",
+            "专业核心还差不是34学分。[S1]",
+            "专业核心和个性化还差34学分。[S1]",
+            "未知模块还差90学分。[S1]")
+        for claim in accepted:
+            with self.subTest(claim=claim):
+                self.assertIsNotNone(guarded_answer(claim, session)[0])
+        for claim in rejected:
+            with self.subTest(claim=claim):
+                self.assertIsNone(guarded_answer(claim, session)[0])
+
+    def test_guard_scope_checks_personal_counts_beside_rule_text(self):
+        from server.agent_runtime import guarded_answer
+        session = self._scope_guard_session()
+        accepted = (
+            "预警规则：未通过课程1门为轻度，未通过课程2门为一般，未通过课程5门及以上为重点。[S1]",
+            "按预警规则，未通过课程1门为轻度。[S1]",
+            "预警规则：未通过课程1门为轻度，但你目前未通过课程5门。[S1]",
+            "目前未通过课程5门，5门及以上为重点预警。[S1]",
+            "若全部通过，学分缺口可降到90学分。[S1]")
+        rejected = (
+            "目前未通过课程2门，5门及以上为重点预警。[S1]",
+            "你有2门课程未通过，预警阈值为5门。[S1]",
+            "按预警规则，你目前未通过课程2门，为一般预警。[S1]",
+            "按照阈值判断你未通过课程2门。[S1]",
+            "预警规则：你未通过课程2门为一般。[S1]",
+            "预警规则：未通过课程2门（乙同学）为一般。[S1]",
+            "阈值：未通过课程2门是你的当前记录。[S1]",
+            "预警规则：未通过课程1门为轻度，但乙同学未通过课程2门。[S1]",
+            "根据预警规则未通过课程2门。[S1]")
+        for claim in accepted:
+            with self.subTest(claim=claim):
+                self.assertIsNotNone(guarded_answer(claim, session)[0])
+        for claim in rejected:
+            with self.subTest(claim=claim):
+                self.assertIsNone(guarded_answer(claim, session)[0])
+
+    def test_guard_scope_rejects_module_credits_in_remote_overall_reply(self):
+        self.remote(); self.login(self.cs)
+        profile = self.client.get("/api/students/" + self.cs).json()
+        module = profile["credits"]["categories"][0]
+        replies = (f"毕业总学分要求{module['required']:g}学分。[S1]",
+                   f"已获学分{module['earned']:g}，还需{module['remaining']:g}学分。[S1]")
+        for reply in replies:
+            with self.subTest(reply=reply), patch("server.assistant.model_request",
+                    side_effect=[call("student_brief"), {"content": reply}]):
+                result = self.ask("请核对我的学分")
+                self.assertEqual(result["mode"], "local-fallback")
+                self.assertNotEqual(result["answer"], reply)
+                self.assertTrue(result["warnings"])
+                self.assertEqual(result["modelAnswer"], reply)
+
+    def test_guard_scope_rejects_wrong_personal_count_with_threshold(self):
+        self.remote(); self.login(self.cs)
+        profile = self.client.get("/api/students/" + self.cs).json()
+        self.assertEqual(profile["metrics"]["failedCourses"], 5)
+        for reply in ("目前未通过课程2门，5门及以上为重点预警。[S1]",
+                      "按预警规则，你目前有2门课程未通过。[S1]"):
+            with self.subTest(reply=reply), patch("server.assistant.model_request",
+                    side_effect=[call("student_brief"), {"content": reply}]):
+                result = self.ask("请解释我的预警")
+                self.assertEqual(result["mode"], "local-fallback")
+                self.assertNotEqual(result["answer"], reply)
+                self.assertTrue(result["warnings"])
+                self.assertEqual(result["modelAnswer"], reply)
+
     def test_critical_numeric_guard_binds_field_subject_and_negation(self):
         from server.agent_runtime import ToolSession, guarded_answer
         session = ToolSession({"id": "admin", "role": "admin"}, "test", self.se)
