@@ -19,7 +19,7 @@ if options.independent: archive_name='知学-B1-独立工作台.zip'
 archive=out/archive_name
 # Ship sources, known reference documents and example screenshots only. Do not
 # descend into user environments, local databases, inspection or design-review files.
-patterns=('*.bat','README.md','requirements*.txt','run.py','Dockerfile','.dockerignore','web/*.css','web/*.html','web/*.js','web/*.svg',
+patterns=('*.bat','README.md','.env.example','.gitignore','requirements*.txt','run.py','Dockerfile','.dockerignore','web/*.css','web/*.html','web/*.js','web/*.svg',
           'server/*.py','scripts/*.py','scripts/*.ps1','tests/test_*.py','tests/evaluate_*.py',
           'docs/validation.json','docs/support-validation.json','docs/screenshots/*.png',
           'data/b1-requirements.json','data/curriculum.json','data/sources/*人才培养方案.pdf',

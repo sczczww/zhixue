@@ -15,7 +15,7 @@ class UpgradedWorkflows(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.previous={k:os.environ.get(k) for k in ('ZHIXUE_DB','ZHIXUE_DEMO')}
-        cls.tmp=tempfile.TemporaryDirectory(prefix='workflow-',dir=Path(__file__).resolve().parents[1]/'tmp')
+        cls.tmp = tempfile.TemporaryDirectory(prefix='workflow-', dir=Path(__file__).resolve().parent)
         cls.root=Path(cls.tmp.name)
         os.environ['ZHIXUE_DB']=str(cls.root/'base.sqlite3');os.environ['ZHIXUE_DEMO']='1'
         from server.main import app
